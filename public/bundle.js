@@ -262,24 +262,40 @@ module.exports = form;
 /***/ (function(module, exports) {
 
 function modal() {
-  var btn = document.querySelector('.popup_engineer_btn'),
-      overlay = document.querySelector('.popup_engineer'),
-      close = document.querySelector('#popup_engineer_close'),
-      closeBack = document.querySelector('.popup_dialog');
+  var callBack = document.querySelectorAll('.phone_link'),
+      btnPopupEngineer = document.querySelector('.popup_engineer_btn'),
+      modalPopup = document.querySelector('.popup'),
+      modalPopupEngineer = document.querySelector('.popup_engineer'),
+      closePopup = document.querySelectorAll('.popup_close')[0],
+      closePopupEngineer = document.querySelectorAll('.popup_close')[1];
 
-  function modalOpen() {
-    overlay.style.display = 'block';
+  function modalOpenPopup() {
+    modalPopup.style.display = 'block';
     document.body.style.overflow = 'hidden';
   }
 
-  function modalClose() {
-    overlay.style.display = 'none';
+  function modalOpenPopupEngineer() {
+    modalPopupEngineer.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function modalClosePopup() {
+    modalPopup.style.display = 'none';
     document.body.style.overflow = '';
   }
 
-  btn.addEventListener('click', modalOpen);
-  close.addEventListener('click', modalClose);
-  overlay.addEventListener('click', modalClose);
+  function modalClosePopupEngineer() {
+    modalPopupEngineer.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  callBack[0].addEventListener('click', modalOpenPopup);
+  callBack[1].addEventListener('click', modalOpenPopup);
+  closePopup.addEventListener('click', modalClosePopup);
+  modalPopup.addEventListener('click', modalClosePopup);
+  btnPopupEngineer.addEventListener('click', modalOpenPopupEngineer);
+  closePopupEngineer.addEventListener('click', modalClosePopupEngineer);
+  modalPopupEngineer.addEventListener('click', modalClosePopupEngineer);
 }
 
 module.exports = modal;
