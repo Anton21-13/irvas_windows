@@ -518,7 +518,7 @@ textarea:focus {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   top: 40%;
-  opacity: 0;
+  opacity: 0.5;
   -webkit-transition: ease 0.2s;
   transition: ease 0.2s;
 }
