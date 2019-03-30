@@ -1,29 +1,25 @@
 function modal() {
 
-  // let more = document.querySelector('.more'),
-  //   overlay = document.querySelector('.overlay'),
-  //   close = document.querySelector('.popup-close'),
-  //   descrBtn = document.querySelectorAll('.description-btn');
+  let btn = document.querySelector('.popup_engineer_btn'),
+    overlay = document.querySelector('.popup_engineer'),
+    close = document.querySelector('#popup_engineer_close'),
+    closeBack = document.querySelector('.popup_dialog');
 
-  // function modalOpen() {
-  //   overlay.style.display = 'block',
-  //   this.classList.add('more-splash'),
-  //   document.body.style.overflow = 'hidden';
-  // }
+  function modalOpen() {
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
 
-  // function modalClose() {
-  //   overlay.style.display = 'none',
-  //   more.classList.remove('more-splash'),
-  //   document.body.style.overflow = '';
-  // }
-    
-  // descrBtn.forEach((item) => {
-  //   item.addEventListener('click', modalOpen);
-  // });
-  
-  // more.addEventListener('click', modalOpen);
+  function modalClose() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  btn.addEventListener('click', modalOpen);
 
-  // close.addEventListener('click', modalClose);
+  close.addEventListener('click', modalClose);
+
+  overlay.addEventListener('click', modalClose);
+
 
 }
 

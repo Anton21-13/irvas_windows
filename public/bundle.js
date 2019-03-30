@@ -261,25 +261,25 @@ module.exports = form;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {// let more = document.querySelector('.more'),
-  //   overlay = document.querySelector('.overlay'),
-  //   close = document.querySelector('.popup-close'),
-  //   descrBtn = document.querySelectorAll('.description-btn');
-  // function modalOpen() {
-  //   overlay.style.display = 'block',
-  //   this.classList.add('more-splash'),
-  //   document.body.style.overflow = 'hidden';
-  // }
-  // function modalClose() {
-  //   overlay.style.display = 'none',
-  //   more.classList.remove('more-splash'),
-  //   document.body.style.overflow = '';
-  // }
-  // descrBtn.forEach((item) => {
-  //   item.addEventListener('click', modalOpen);
-  // });
-  // more.addEventListener('click', modalOpen);
-  // close.addEventListener('click', modalClose);
+function modal() {
+  var btn = document.querySelector('.popup_engineer_btn'),
+      overlay = document.querySelector('.popup_engineer'),
+      close = document.querySelector('#popup_engineer_close'),
+      closeBack = document.querySelector('.popup_dialog');
+
+  function modalOpen() {
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function modalClose() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', modalOpen);
+  close.addEventListener('click', modalClose);
+  overlay.addEventListener('click', modalClose);
 }
 
 module.exports = modal;
@@ -344,32 +344,52 @@ module.exports = slider;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function tabs() {// let tab = document.querySelectorAll('.info-header-tab'),
-  //   info = document.querySelector('.info-header'),
-  //   tabContent = document.querySelectorAll('.info-tabcontent');
-  // function hideTabContent(a) {
-  //   for (let i = a; i < tabContent.length; i++) {
-  //     tabContent[i].classList.remove('show');
-  //     tabContent[i].classList.add('hide');
-  //   }
-  // }
-  // hideTabContent(1);
-  // function showTabContent(b) {
-  //   if (tabContent[b].classList.contains('hide')) {
-  //     tabContent[b].classList.remove('hide');
-  //     tabContent[b].classList.add('show');
-  //   }
-  // }
-  // info.addEventListener('click', (event) => {
+function tabs() {
+  var tab = document.querySelectorAll('.decoration_item'),
+      tabLine = document.querySelectorAll('.decoration_slider_tab'),
+      info = document.querySelector('.decoration_slider'),
+      tabContent = document.querySelectorAll('.info-tabcontent');
+
+  function hideTabContent(a) {
+    for (var i = a; i < tabContent.length; i++) {
+      tabContent[i].style.display = 'none';
+    }
+  }
+
+  hideTabContent(1);
+
+  function showTabContent(b) {
+    if (tabContent[b].style.display = 'none') {
+      tabContent[b].style.display = 'block';
+    }
+  }
+
+  info.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target && target.classList.contains('decoration_item')) {
+      for (var i = 0; i < tab.length; i++) {
+        if (target == tab[i]) {
+          hideTabContent(0);
+          showTabContent(i);
+          break;
+        }
+      }
+    }
+  }); // info.addEventListener('click', (event) => {
   //   let target = event.target;
-  //   if (target && target.classList.contains('info-header-tab')) {
-  //     for (let i = 0; i < tab.length; i++) {
-  //       if (target == tab[i]) {
-  //         hideTabContent(0);
-  //         showTabContent(i);
-  //         break;
-  //       }
+  //   if (target && target.classList.contains('.decoration_slider_tab')) {
+  //     for (let i = 0; i < tabLine.length; i++) {
+  //       // tabContent[i].classList.remove('show');
+  //       tabLine[i].classList.add('after_click');
   //     }
+  //     // for (let i = 0; i < tab.length; i++) {
+  //     //   if (target == tab[i]) {
+  //     //     hideTabContent(0);
+  //     //     showTabContent(i);
+  //     //     break;
+  //     //   }
+  //     // }
   //   }
   // });
 }
