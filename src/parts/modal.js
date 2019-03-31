@@ -13,14 +13,14 @@ function modal() {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       modalPopup.style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      document.body.parentElement.style.overflow = 'hidden';
     });
   });
 
   popupBtn.addEventListener('click', (e) => {
     e.preventDefault();
     modalPopupEngineer.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    document.body.parentElement.style.overflow = 'hidden';
   });
 
   setTimeout(() => {
@@ -29,25 +29,25 @@ function modal() {
   
   closePopup.addEventListener('click', () => {
     modalPopup.style.display = 'none';
-    document.body.style.overflow = '';
+    document.body.parentElement.style.overflow = '';
   });
 
   window.addEventListener('click', (e) => {
     if (e.target == modalPopup) {
       modalPopup.style.display = 'none';
-      document.body.style.overflow = '';
+      document.body.parentElement.style.overflow = '';
     }
   });
 
   closePopupEngineer.addEventListener('click', () => {
     modalPopupEngineer.style.display = 'none';
-    document.body.style.overflow = '';
+    document.body.parentElement.style.overflow = '';
   });
 
   window.addEventListener('click', (e) => {
     if (e.target == modalPopupEngineer) {
       modalPopupEngineer.style.display = 'none';
-      document.body.style.overflow = '';
+      document.body.parentElement.style.overflow = '';
     }
   });
 

@@ -60,17 +60,22 @@ function form() {
     });
   });
 
-  
-  inputPhone.forEach((elem) => {
-    elem.addEventListener('focus', () => {
-      if(!/^\+\d*$/.test(elem.value)) {
-        elem.value = '+';
-      }
+  inputPhone.forEach((item) => {
+    item.addEventListener('focus', () => {
+      if (!/^\+\d*$/.test(item.value))
+        item.value = '+';
     });
 
-    elem.addEventListener('keydown', (e) => {
-      if(!/\d/.test(e.key)) {
+    item.addEventListener('keypress', (e) => {
+      if (!/\d/.test(e.key)) {
         e.preventDefault();
+        alert("Прошу вводить только цифры")
+      } else {
+        if (item.value.length == 2) item.value = item.value + "(";
+        if (item.value.length == 6) item.value = item.value + ")-";
+        if (item.value.length == 11) item.value = item.value + "-";
+        if (item.value.length == 14) item.value = item.value + "-";
+        if (item.value.length > 16) item.value = item.value.substring(0, 16);
       }
     });
   });

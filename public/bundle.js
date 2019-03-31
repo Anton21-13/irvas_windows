@@ -1665,15 +1665,20 @@ function form() {
       });
     });
   });
-  inputPhone.forEach(function (elem) {
-    elem.addEventListener('focus', function () {
-      if (!/^\+\d*$/.test(elem.value)) {
-        elem.value = '+';
-      }
+  inputPhone.forEach(function (item) {
+    item.addEventListener('focus', function () {
+      if (!/^\+\d*$/.test(item.value)) item.value = '+';
     });
-    elem.addEventListener('keydown', function (e) {
+    item.addEventListener('keypress', function (e) {
       if (!/\d/.test(e.key)) {
         e.preventDefault();
+        alert("Прошу вводить только цифры");
+      } else {
+        if (item.value.length == 2) item.value = item.value + "(";
+        if (item.value.length == 6) item.value = item.value + ")-";
+        if (item.value.length == 11) item.value = item.value + "-";
+        if (item.value.length == 14) item.value = item.value + "-";
+        if (item.value.length > 16) item.value = item.value.substring(0, 16);
       }
     });
   });
@@ -1701,35 +1706,35 @@ function modal() {
     item.addEventListener('click', function (e) {
       e.preventDefault();
       modalPopup.style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      document.body.parentElement.style.overflow = 'hidden';
     });
   });
   popupBtn.addEventListener('click', function (e) {
     e.preventDefault();
     modalPopupEngineer.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    document.body.parentElement.style.overflow = 'hidden';
   });
   setTimeout(function () {
     modalPopup.style.display = "block";
   }, 60 * 1000);
   closePopup.addEventListener('click', function () {
     modalPopup.style.display = 'none';
-    document.body.style.overflow = '';
+    document.body.parentElement.style.overflow = '';
   });
   window.addEventListener('click', function (e) {
     if (e.target == modalPopup) {
       modalPopup.style.display = 'none';
-      document.body.style.overflow = '';
+      document.body.parentElement.style.overflow = '';
     }
   });
   closePopupEngineer.addEventListener('click', function () {
     modalPopupEngineer.style.display = 'none';
-    document.body.style.overflow = '';
+    document.body.parentElement.style.overflow = '';
   });
   window.addEventListener('click', function (e) {
     if (e.target == modalPopupEngineer) {
       modalPopupEngineer.style.display = 'none';
-      document.body.style.overflow = '';
+      document.body.parentElement.style.overflow = '';
     }
   });
 }
@@ -1745,28 +1750,54 @@ module.exports = modal;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {
-  var pictures = document.querySelectorAll('.lupa_tab'),
-      btnPopupEngineer = document.querySelector('.popup_engineer_btn'),
-      modalWorks = document.querySelector('.works'),
-      closePopup = document.querySelectorAll('.popup_close')[0],
-      closePopupEngineer = document.querySelectorAll('.popup_close')[1];
+function pictures() {
+  // let works = document.querySelectorAll('.works .row div');
+  // works.forEach((work) => {
+  //   work.addEventListener('click', (e) => {
+  //     e.preventDefault();
+  //     let popupImage = document.createElement('div');
+  //     let curentImage = document.createElement('img');
+  //     let curentImageHref = work.querySelector('a').getAttribute('href');
+  //     popupImage.classList.add('popup');
+  //     curentImage.setAttribute('src', curentImageHref);
+  //     popupImage.appendChild(curentImage);
+  //     document.body.appendChild(popupImage);
+  //     popupImage.style.display = 'flex';
+  //     popupImage.style.alignItems = 'center';
+  //     popupImage.style.justifyContent = 'center';
+  //     popupImage.addEventListener('click', (e) => {
+  //       if (e.target.classList.contains('popup')) {
+  //         popupImage.style.display = 'none';
+  //         document.body.removeChild(popupImage);
+  //       }
+  //     });
+  //   });
+  // });
+  var overlay = document.createElement('div');
+  overlay.classList.add('works_overlay');
+  document.body.addEventListener('click', function (e) {
+    var t = e.target;
 
-  function modalOpenWorks() {
-    modalWorks.style.display = 'block';
-    document.body.style = 'background-color: rgba(0, 0, 0, 0.5)';
-  } // function modalCloseWorks() {
-  //   modalPopup.style.display = 'none';
-  //   document.body.style.background = '#fff';
-  // }
+    if (t.classList.contains('works_overlay')) {
+      overlay.parentElement.removeChild(overlay);
+      document.body.parentElement.style.overflow = '';
+    }
 
-
-  pictures.forEach(function (item) {
-    item.addEventListener('click', modalOpenWorks);
+    if (t.classList.contains('lightbox') && t.tagName == 'IMG' && !t.classList.contains('lupa')) {
+      e.preventDefault();
+      overlay.innerHTML = '';
+      var block = document.createElement('img'),
+          tsrc = t.getAttribute('src');
+      tsrc = tsrc.slice(0, 13) + "/big_img" + tsrc.slice(13, tsrc.length);
+      block.setAttribute("src", tsrc);
+      overlay.appendChild(block);
+      document.body.appendChild(overlay);
+      document.body.parentElement.style.overflow = 'hidden';
+    }
   });
 }
 
-module.exports = modal;
+module.exports = pictures;
 
 /***/ }),
 
@@ -1896,8 +1927,8 @@ function timer() {
     var t = Date.parse(endtime) - Date.parse(new Date()),
         seconds = Math.floor(t / 1000 % 60),
         minutes = Math.floor(t / 1000 / 60 % 60),
-        hours = Math.floor(t / 1000 / 60 / 60 % 24);
-    days = Math.floor(t / 1000 / 60 / 60 / 24 % 24);
+        hours = Math.floor(t / 1000 / 60 / 60 % 24),
+        days = Math.floor(t / 1000 / 60 / 60 / 24 % 24);
 
     if (days < 10) {
       days = "0 ".concat(days);
