@@ -1716,6 +1716,7 @@ function modal() {
   });
   setTimeout(function () {
     modalPopup.style.display = "block";
+    document.body.parentElement.style.overflow = 'hidden';
   }, 60 * 1000);
   closePopup.addEventListener('click', function () {
     modalPopup.style.display = 'none';
