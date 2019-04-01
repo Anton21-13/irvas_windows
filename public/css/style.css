@@ -1124,6 +1124,15 @@ textarea:focus {
   padding: 1rem 5rem;
 }
 
+.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
 /*Media*/
 @media (max-width: 1400px) {
   .main {

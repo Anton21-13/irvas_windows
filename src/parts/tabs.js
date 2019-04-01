@@ -1,57 +1,50 @@
 function tabs() {
 
-  let tab = document.querySelectorAll('.decoration_item'),
-    tabLine = document.querySelectorAll('.decoration_slider_tab'),
-    info = document.querySelector('.decoration_slider'),
-    tabContent = document.querySelectorAll('.info-tabcontent');
+  let glazingSlider = document.querySelector('.glazing_slider'),
+		glazingBlock = document.querySelectorAll('.glazing_block'),
+		glazingRow = document.querySelectorAll('.glazing .row');
+
+	hideTabContent(1, glazingRow);
+
+	glazingSlider.addEventListener('click', function (event) {
+		let target = event.target;
+		if (!target.classList.contains('glazing_block')) {
+			target = target.parentNode;
+		}
+
+		if (target) {
+			for (let i = 0; i < glazingBlock.length; i++) {
+				glazingBlock[i].querySelector('a').classList.remove('active');
+				if (glazingBlock[i] == target) {
+					hideTabContent(0, glazingRow);
+					showTabContent(i, glazingRow);
+				}
+			}
+			target.querySelector('a').classList.add('active');
+		}
+	});
 
 
-  function hideTabContent(a) {
-    for (let i = a; i < tabContent.length; i++) {
-      tabContent[i].style.display = 'none';
-    }
-  }
-  hideTabContent(1);
-
-
-  function showTabContent(b) {
-    if (tabContent[b].style.display = 'none') {
-      tabContent[b].style.display = 'block';
-    }
-  }
-
-  info.addEventListener('click', (event) => {
-    let target = event.target;
-    if (target && target.classList.contains('decoration_item')) {
-      for (let i = 0; i < tab.length; i++) {
-        if (target == tab[i]) {
-          hideTabContent(0);
-          showTabContent(i);
-          break;
-        }
+  function hideTabContent(a, b) {
+    for (let i = a; i < b.length; i++) {
+      b[i].classList.remove('show');
+      b[i].classList.add('hide');
+      if (b[i].classList.contains('big_img-item')) {
+        b[i].style.margin = 'auto';
+        b[i].style.marginBottom = '10px';
       }
     }
-  });
+  }
 
-  // info.addEventListener('click', (event) => {
-  //   let target = event.target;
-  //   if (target && target.classList.contains('.decoration_slider_tab')) {
-  //     for (let i = 0; i < tabLine.length; i++) {
-  //       // tabContent[i].classList.remove('show');
-  //       tabLine[i].classList.add('after_click');
-  //     }
-  //     // for (let i = 0; i < tab.length; i++) {
-  //     //   if (target == tab[i]) {
-  //     //     hideTabContent(0);
-  //     //     showTabContent(i);
-  //     //     break;
-  //     //   }
-  //     // }
-  //   }
-  // });
+  function showTabContent(key, slideItems) {
+
+    if (slideItems[key].classList.contains('hide')) {
+      slideItems[key].classList.remove('hide');
+      slideItems[key].classList.add('show');
+    }
+  }
 
 
-  
 }
 
 module.exports = tabs;

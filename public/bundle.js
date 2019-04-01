@@ -1510,14 +1510,17 @@ module.exports = g;
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/form */ "./parts/form.js");
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   var calc = __webpack_require__(/*! ./parts/calc */ "./parts/calc.js"),
-      form = __webpack_require__(/*! ./parts/form */ "./parts/form.js"),
       modal = __webpack_require__(/*! ./parts/modal */ "./parts/modal.js"),
       slider = __webpack_require__(/*! ./parts/slider */ "./parts/slider.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./parts/tabs.js"),
@@ -1525,7 +1528,7 @@ window.addEventListener('DOMContentLoaded', function () {
       timer = __webpack_require__(/*! ./parts/timer */ "./parts/timer.js");
 
   calc();
-  form();
+  Object(_parts_form__WEBPACK_IMPORTED_MODULE_0__["default"])();
   modal();
   slider();
   tabs();
@@ -1554,42 +1557,119 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function calc() {// let persons = document.querySelectorAll('.counter-block-input')[0],
-  //   restDays = document.querySelectorAll('.counter-block-input')[1],
-  //   place = document.getElementById('select'),
-  //   totalValue = document.getElementById('total'),
-  //   personsSum = 0,
-  //   daysSum = 0,
-  //   total = 0;
-  // totalValue.innerHTML = 0;
-  // persons.addEventListener('change', function() {
-  //   personsSum = +this.value;
-  //   total = daysSum * personsSum * 4000;
-  //   if(restDays.value == '' || persons.value == '') {
-  //     totalValue.innerHTML = 0;
-  //   } else {
-  //     let a = total;
-  //     totalValue.innerHTML = a * place.options[place.selectedIndex].value;
-  //   }
-  // });
-  // restDays.addEventListener('change', function() {
-  //   daysSum = +this.value;
-  //   total = daysSum * personsSum * 4000 ;
-  //   if(persons.value == '' || persons.value == '') {
-  //     totalValue.innerHTML = 0;
-  //   } else {
-  //     let a = total;
-  //     totalValue.innerHTML = a * place.options[place.selectedIndex].value;
-  //   }
-  // });
-  // place.addEventListener('change', function() {
-  //   if (restDays.value == '' || persons.value == '') {
-  //     totalValue.innerHTML = 0;
-  //   } else {
-  //     let a = total;
-  //     totalValue.innerHTML = a * this.options[this.selectedIndex].value;
-  //   }
-  // });
+// import submissionForm from './index';
+function calc() {
+  var popupCalcBtn = document.querySelectorAll('.popup_calc_btn'),
+      // Кнопки вызова первого окна
+  popupCalc = document.querySelector('.popup_calc'),
+      // Модальное окно выбора формы балкона
+  balconIcons = document.querySelectorAll('.balcon_icons a'),
+      // меню выбора формы балкона
+  bigImg = document.querySelectorAll('.big_img img'),
+      // Блоки с большыми картинками
+  popupCalcButton = document.querySelector('.popup_calc_button'),
+      // Кнопка "Далее"
+  popupCalcProfile = document.querySelector('.popup_calc_profile'),
+      // Второе модальное окно
+  popupCalcProfileButton = document.querySelector('.popup_calc_profile_button'),
+      // Третье модальное окно
+  popupCalcEnd = document.querySelector('.popup_calc_end'),
+      // Третье модальное окно
+  popupCalcInput = popupCalc.querySelectorAll('input'),
+      popupCalcSelect = document.querySelector('select'),
+      popupCalcLabel = popupCalcProfile.querySelectorAll('label'),
+      windowSettings = {};
+  popupCalcBtn.forEach(function (element) {
+    element.addEventListener('click', function () {
+      popupCalc.style.display = "block";
+      windowSettings.type = balconIcons[0].getAttribute('class');
+    });
+  });
+  popupCalc.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('popup_calc_close') || target.parentNode.classList.contains('popup_calc_close') || target.classList.contains('popup_calc')) {
+      popupCalc.style.display = 'none';
+      windowSettings = {};
+    }
+  });
+  balconIcons.forEach(function (element) {
+    element.addEventListener('click', function (event) {
+      event.preventDefault();
+      var typeWindowCalc = event.target.parentNode.getAttribute('class');
+      bigImg.forEach(function (el) {
+        var typeSelectedWindow = el.getAttribute('id');
+
+        if (typeSelectedWindow == typeWindowCalc) {
+          el.style.display = 'inline-block';
+          windowSettings.type = typeWindowCalc;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+      console.log(windowSettings);
+    });
+  });
+  popupCalcInput.forEach(function (input) {
+    input.addEventListener('keyup', function () {
+      this.value = this.value.replace(/[^0-9]+/g, '');
+      input.textContent = this.value;
+    });
+  });
+  popupCalcButton.addEventListener('click', function () {
+    if (popupCalcInput[0].value && popupCalcInput[1].value) {
+      popupCalc.style.display = 'none';
+      popupCalcProfile.style.display = 'block';
+      windowSettings.width = popupCalcInput[0].value;
+      windowSettings.heigh = popupCalcInput[1].value;
+      windowSettings.glazingType = popupCalcSelect.options[0].value;
+    } else {
+      popupCalcInput.forEach(function (input) {
+        if (!input.value) {
+          input.focus();
+        }
+      });
+    }
+  });
+  popupCalcSelect.addEventListener('change', function () {
+    windowSettings.glazingType = this.options[this.selectedIndex].value;
+  });
+  popupCalcLabel.forEach(function (label) {
+    label.addEventListener('change', function (event) {
+      if (event.target.classList.contains('checkbox')) {
+        [].slice.call(document.querySelectorAll('.checkbox')).forEach(function (c) {
+          return c.checked = false;
+        });
+        event.target.checked = true;
+      }
+
+      windowSettings.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
+    });
+  });
+  popupCalcProfileButton.addEventListener('click', function () {
+    if (windowSettings.glazingProfile) {
+      popupCalcProfile.style.display = 'none';
+      popupCalcEnd.style.display = 'block';
+    }
+  });
+  popupCalcProfile.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('popup_calc_profile_close') || target.parentNode.classList.contains('popup_calc_profile_close') || target.classList.contains('popup_calc_profile')) {
+      popupCalcProfile.style.display = 'none';
+      windowSettings = {};
+    }
+  });
+  popupCalcEnd.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('popup_calc_end_close') || target.parentNode.classList.contains('popup_calc_end_close') || target.classList.contains('popup_calc_end')) {
+      popupCalcEnd.style.display = 'none';
+      windowSettings = {};
+    }
+  });
+  var popupCalcEndForms = document.querySelector('.popup_calc_end form');
+  submissionForm(popupCalcEndForms, windowSettings);
 }
 
 module.exports = calc;
@@ -1600,12 +1680,14 @@ module.exports = calc;
 /*!***********************!*\
   !*** ./parts/form.js ***!
   \***********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
-function form() {
+var form = function form() {
   var message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжимся!',
@@ -1686,9 +1768,123 @@ function form() {
       }
     });
   });
-}
 
-module.exports = form;
+  function calc() {
+    var popupCalcBtn = document.querySelectorAll('.popup_calc_btn'),
+        // Кнопки вызова первого окна
+    popupCalc = document.querySelector('.popup_calc'),
+        // Модальное окно выбора формы балкона
+    balconIcons = document.querySelectorAll('.balcon_icons a'),
+        // меню выбора формы балкона
+    bigImg = document.querySelectorAll('.big_img img'),
+        // Блоки с большыми картинками
+    popupCalcButton = document.querySelector('.popup_calc_button'),
+        // Кнопка "Далее"
+    popupCalcProfile = document.querySelector('.popup_calc_profile'),
+        // Второе модальное окно
+    popupCalcProfileButton = document.querySelector('.popup_calc_profile_button'),
+        // Третье модальное окно
+    popupCalcEnd = document.querySelector('.popup_calc_end'),
+        // Третье модальное окно
+    popupCalcInput = popupCalc.querySelectorAll('input'),
+        popupCalcSelect = document.querySelector('select'),
+        popupCalcLabel = popupCalcProfile.querySelectorAll('label'),
+        windowSettings = {};
+    popupCalcBtn.forEach(function (element) {
+      element.addEventListener('click', function () {
+        popupCalc.style.display = "block";
+        windowSettings.type = balconIcons[0].getAttribute('class');
+      });
+    });
+    popupCalc.addEventListener('click', function (event) {
+      var target = event.target;
+
+      if (target.classList.contains('popup_calc_close') || target.parentNode.classList.contains('popup_calc_close') || target.classList.contains('popup_calc')) {
+        popupCalc.style.display = 'none';
+        windowSettings = {};
+      }
+    });
+    balconIcons.forEach(function (element) {
+      element.addEventListener('click', function (event) {
+        event.preventDefault();
+        var typeWindowCalc = event.target.parentNode.getAttribute('class');
+        bigImg.forEach(function (el) {
+          var typeSelectedWindow = el.getAttribute('id');
+
+          if (typeSelectedWindow == typeWindowCalc) {
+            el.style.display = 'inline-block';
+            windowSettings.type = typeWindowCalc;
+          } else {
+            el.style.display = 'none';
+          }
+        });
+        console.log(windowSettings);
+      });
+    });
+    popupCalcInput.forEach(function (input) {
+      input.addEventListener('keyup', function () {
+        this.value = this.value.replace(/[^0-9]+/g, '');
+        input.textContent = this.value;
+      });
+    });
+    popupCalcButton.addEventListener('click', function () {
+      if (popupCalcInput[0].value && popupCalcInput[1].value) {
+        popupCalc.style.display = 'none';
+        popupCalcProfile.style.display = 'block';
+        windowSettings.width = popupCalcInput[0].value;
+        windowSettings.heigh = popupCalcInput[1].value;
+        windowSettings.glazingType = popupCalcSelect.options[0].value;
+      } else {
+        popupCalcInput.forEach(function (input) {
+          if (!input.value) {
+            input.focus();
+          }
+        });
+      }
+    });
+    popupCalcSelect.addEventListener('change', function () {
+      windowSettings.glazingType = this.options[this.selectedIndex].value;
+    });
+    popupCalcLabel.forEach(function (label) {
+      label.addEventListener('change', function (event) {
+        if (event.target.classList.contains('checkbox')) {
+          [].slice.call(document.querySelectorAll('.checkbox')).forEach(function (c) {
+            return c.checked = false;
+          });
+          event.target.checked = true;
+        }
+
+        windowSettings.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
+      });
+    });
+    popupCalcProfileButton.addEventListener('click', function () {
+      if (windowSettings.glazingProfile) {
+        popupCalcProfile.style.display = 'none';
+        popupCalcEnd.style.display = 'block';
+      }
+    });
+    popupCalcProfile.addEventListener('click', function (event) {
+      var target = event.target;
+
+      if (target.classList.contains('popup_calc_profile_close') || target.parentNode.classList.contains('popup_calc_profile_close') || target.classList.contains('popup_calc_profile')) {
+        popupCalcProfile.style.display = 'none';
+        windowSettings = {};
+      }
+    });
+    popupCalcEnd.addEventListener('click', function (event) {
+      var target = event.target;
+
+      if (target.classList.contains('popup_calc_end_close') || target.parentNode.classList.contains('popup_calc_end_close') || target.classList.contains('popup_calc_end')) {
+        popupCalcEnd.style.display = 'none';
+        windowSettings = {};
+      }
+    });
+    var popupCalcEndForms = document.querySelector('.popup_calc_end form');
+    submissionForm(popupCalcEndForms, windowSettings);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (form);
 
 /***/ }),
 
@@ -1865,53 +2061,49 @@ module.exports = slider;
 /***/ (function(module, exports) {
 
 function tabs() {
-  var tab = document.querySelectorAll('.decoration_item'),
-      tabLine = document.querySelectorAll('.decoration_slider_tab'),
-      info = document.querySelector('.decoration_slider'),
-      tabContent = document.querySelectorAll('.info-tabcontent');
-
-  function hideTabContent(a) {
-    for (var i = a; i < tabContent.length; i++) {
-      tabContent[i].style.display = 'none';
-    }
-  }
-
-  hideTabContent(1);
-
-  function showTabContent(b) {
-    if (tabContent[b].style.display = 'none') {
-      tabContent[b].style.display = 'block';
-    }
-  }
-
-  info.addEventListener('click', function (event) {
+  var glazingSlider = document.querySelector('.glazing_slider'),
+      glazingBlock = document.querySelectorAll('.glazing_block'),
+      glazingRow = document.querySelectorAll('.glazing .row');
+  hideTabContent(1, glazingRow);
+  glazingSlider.addEventListener('click', function (event) {
     var target = event.target;
 
-    if (target && target.classList.contains('decoration_item')) {
-      for (var i = 0; i < tab.length; i++) {
-        if (target == tab[i]) {
-          hideTabContent(0);
-          showTabContent(i);
-          break;
+    if (!target.classList.contains('glazing_block')) {
+      target = target.parentNode;
+    }
+
+    if (target) {
+      for (var i = 0; i < glazingBlock.length; i++) {
+        glazingBlock[i].querySelector('a').classList.remove('active');
+
+        if (glazingBlock[i] == target) {
+          hideTabContent(0, glazingRow);
+          showTabContent(i, glazingRow);
         }
       }
+
+      target.querySelector('a').classList.add('active');
     }
-  }); // info.addEventListener('click', (event) => {
-  //   let target = event.target;
-  //   if (target && target.classList.contains('.decoration_slider_tab')) {
-  //     for (let i = 0; i < tabLine.length; i++) {
-  //       // tabContent[i].classList.remove('show');
-  //       tabLine[i].classList.add('after_click');
-  //     }
-  //     // for (let i = 0; i < tab.length; i++) {
-  //     //   if (target == tab[i]) {
-  //     //     hideTabContent(0);
-  //     //     showTabContent(i);
-  //     //     break;
-  //     //   }
-  //     // }
-  //   }
-  // });
+  });
+
+  function hideTabContent(a, b) {
+    for (var i = a; i < b.length; i++) {
+      b[i].classList.remove('show');
+      b[i].classList.add('hide');
+
+      if (b[i].classList.contains('big_img-item')) {
+        b[i].style.margin = 'auto';
+        b[i].style.marginBottom = '10px';
+      }
+    }
+  }
+
+  function showTabContent(key, slideItems) {
+    if (slideItems[key].classList.contains('hide')) {
+      slideItems[key].classList.remove('hide');
+      slideItems[key].classList.add('show');
+    }
+  }
 }
 
 module.exports = tabs;
