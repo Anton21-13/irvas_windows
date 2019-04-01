@@ -6,10 +6,11 @@ function form() {
     failure: 'Что-то пошло не так...'
   };
 
-  let form = document.querySelectorAll('.form'),
-    input = document.getElementsByTagName('.input'),
+  let form = document.querySelectorAll('form'),
+    input = document.getElementsByTagName('input'),
     statusMessage = document.createElement('div'),
     inputPhone = document.getElementsByName('user_phone');
+
 
   form.forEach(function submissionForm(element) {
     element.addEventListener('submit', (a) => {
@@ -35,10 +36,12 @@ function form() {
           request.onreadystatechange = () => {
             if (request.readyState < 4) {
               resolve();
-            } else if (request.readyState === 4 && request.status == 200) {
-              resolve();
-            } else {
-              reject();
+            } else if (request.readyState === 4) {
+              if (request.status == 200) {
+                resolve();
+              } else {
+                reject();
+              }
             }
           };
           request.send(json);
@@ -49,16 +52,22 @@ function form() {
         for (let i = 0; i < input.length; i++) {
           input[i].value = '';
         }
-        statusMessage.innerHTML = '';
-      }
+      }  
 
       postData(formData)
       .then(() => statusMessage.innerHTML = message.loading)
-      .then(() => statusMessage.innerHTML = message.success)
+      .then(() => {
+        statusMessage.innerHTML = message.success;
+        setTimeout(cleaner, 3000);
+      })
       .catch(() => statusMessage.innerHTML = message.failure)
-      .then(() => setTimeout(clearInput, 4000));
+      .then(clearInput);
     });
   });
+
+  function cleaner() {
+    statusMessage.innerHTML = "";
+  }
 
   inputPhone.forEach((item) => {
     item.addEventListener('focus', () => {

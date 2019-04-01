@@ -1611,8 +1611,8 @@ function form() {
     success: 'Спасибо! Скоро мы с вами свяжимся!',
     failure: 'Что-то пошло не так...'
   };
-  var form = document.querySelectorAll('.form'),
-      input = document.getElementsByTagName('.input'),
+  var form = document.querySelectorAll('form'),
+      input = document.getElementsByTagName('input'),
       statusMessage = document.createElement('div'),
       inputPhone = document.getElementsByName('user_phone');
   form.forEach(function submissionForm(element) {
@@ -1635,10 +1635,12 @@ function form() {
           request.onreadystatechange = function () {
             if (request.readyState < 4) {
               resolve();
-            } else if (request.readyState === 4 && request.status == 200) {
-              resolve();
-            } else {
-              reject();
+            } else if (request.readyState === 4) {
+              if (request.status == 200) {
+                resolve();
+              } else {
+                reject();
+              }
             }
           };
 
@@ -1650,21 +1652,23 @@ function form() {
         for (var i = 0; i < input.length; i++) {
           input[i].value = '';
         }
-
-        statusMessage.innerHTML = '';
       }
 
       postData(formData).then(function () {
         return statusMessage.innerHTML = message.loading;
       }).then(function () {
-        return statusMessage.innerHTML = message.success;
+        statusMessage.innerHTML = message.success;
+        setTimeout(cleaner, 3000);
       }).catch(function () {
         return statusMessage.innerHTML = message.failure;
-      }).then(function () {
-        return setTimeout(clearInput, 4000);
-      });
+      }).then(clearInput);
     });
   });
+
+  function cleaner() {
+    statusMessage.innerHTML = "";
+  }
+
   inputPhone.forEach(function (item) {
     item.addEventListener('focus', function () {
       if (!/^\+\d*$/.test(item.value)) item.value = '+';
