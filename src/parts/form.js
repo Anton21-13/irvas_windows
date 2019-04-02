@@ -1,4 +1,4 @@
-let form = () => {
+function form() {
 
   let message = {
     loading: 'Загрузка...',
@@ -211,7 +211,7 @@ let form = () => {
   }
 
 
-};
+}
 
-export default form;
+module.exports = form;
 

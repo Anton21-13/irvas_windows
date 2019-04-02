@@ -117,8 +117,8 @@ function calc() {
 		}
 	});	
 
-	const popupCalcEndForms = document.querySelector('.popup_calc_end form');
-	submissionForm(popupCalcEndForms, windowSettings);
+	// const popupCalcEndForms = document.querySelector('.popup_calc_end form');
+	// submissionForm(popupCalcEndForms, windowSettings);
 }
 
 module.exports = calc;

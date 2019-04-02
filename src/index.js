@@ -1,4 +1,3 @@
-import form from './parts/form';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -9,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
     slider = require('./parts/slider'),
     tabs = require('./parts/tabs'),
     pictures = require('./parts/pictures'),
+    form = require('./parts/form'),
     timer = require('./parts/timer');
 
   calc();

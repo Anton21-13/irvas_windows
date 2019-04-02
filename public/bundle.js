@@ -1510,12 +1510,8 @@ module.exports = g;
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/form */ "./parts/form.js");
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
@@ -1525,10 +1521,11 @@ window.addEventListener('DOMContentLoaded', function () {
       slider = __webpack_require__(/*! ./parts/slider */ "./parts/slider.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./parts/tabs.js"),
       pictures = __webpack_require__(/*! ./parts/pictures */ "./parts/pictures.js"),
+      form = __webpack_require__(/*! ./parts/form */ "./parts/form.js"),
       timer = __webpack_require__(/*! ./parts/timer */ "./parts/timer.js");
 
   calc();
-  Object(_parts_form__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  form();
   modal();
   slider();
   tabs();
@@ -1667,9 +1664,8 @@ function calc() {
       popupCalcEnd.style.display = 'none';
       windowSettings = {};
     }
-  });
-  var popupCalcEndForms = document.querySelector('.popup_calc_end form');
-  submissionForm(popupCalcEndForms, windowSettings);
+  }); // const popupCalcEndForms = document.querySelector('.popup_calc_end form');
+  // submissionForm(popupCalcEndForms, windowSettings);
 }
 
 module.exports = calc;
@@ -1680,14 +1676,12 @@ module.exports = calc;
 /*!***********************!*\
   !*** ./parts/form.js ***!
   \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
-var form = function form() {
+function form() {
   var message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжимся!',
@@ -1882,9 +1876,9 @@ var form = function form() {
     var popupCalcEndForms = document.querySelector('.popup_calc_end form');
     submissionForm(popupCalcEndForms, windowSettings);
   }
-};
+}
 
-/* harmony default export */ __webpack_exports__["default"] = (form);
+module.exports = form;
 
 /***/ }),
 
@@ -2061,29 +2055,24 @@ module.exports = slider;
 /***/ (function(module, exports) {
 
 function tabs() {
-  var glazingSlider = document.querySelector('.glazing_slider'),
-      glazingBlock = document.querySelectorAll('.glazing_block'),
-      glazingRow = document.querySelectorAll('.glazing .row');
-  hideTabContent(1, glazingRow);
-  glazingSlider.addEventListener('click', function (event) {
-    var target = event.target;
+  //Табы остекления
+  var info = document.querySelector('.glazing_slider'),
+      tabImg = document.querySelectorAll('.img'),
+      tabText = document.querySelectorAll('.tab-link'),
+      tabContent = document.querySelectorAll('.info-tabcontent-1'); //Табы отделки
 
-    if (!target.classList.contains('glazing_block')) {
-      target = target.parentNode;
-    }
+  var info2 = document.querySelector('.decoration_slider'),
+      tabText2 = document.querySelectorAll('.decoration_slider-link'),
+      tabContent2 = document.querySelectorAll('.info-tabcontent-2'); // табы в калькуляторе
 
-    if (target) {
-      for (var i = 0; i < glazingBlock.length; i++) {
-        glazingBlock[i].querySelector('a').classList.remove('active');
-
-        if (glazingBlock[i] == target) {
-          hideTabContent(0, glazingRow);
-          showTabContent(i, glazingRow);
-        }
-      }
-
-      target.querySelector('a').classList.add('active');
-    }
+  var info3 = document.querySelector('.balcon_icons'),
+      tabLinck = info3.querySelectorAll('.balcon_icons a'),
+      tabImg3 = info3.querySelectorAll('.type_img'),
+      tabContent3 = document.querySelectorAll('.big_img-item');
+  tabLinck.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
   });
 
   function hideTabContent(a, b) {
@@ -2098,12 +2087,80 @@ function tabs() {
     }
   }
 
-  function showTabContent(key, slideItems) {
-    if (slideItems[key].classList.contains('hide')) {
-      slideItems[key].classList.remove('hide');
-      slideItems[key].classList.add('show');
+  hideTabContent(1, tabContent);
+  hideTabContent(1, tabContent2);
+  hideTabContent(1, tabContent3);
+
+  function showTabContent(b, c) {
+    if (c[b].classList.contains('hide')) {
+      c[b].classList.add('show');
+      c[b].classList.remove('hide');
     }
   }
+
+  function wrap(params) {
+    params.addEventListener('click', function (event) {
+      var target = event.target;
+
+      if (target || target.classList.contains('glazing_block') || target.classList.contains('tab-link') || target.classList.contains('img') || target.classList.contains('decoration_slider-link')) {
+        var tab = function tab(_tab, tabContent) {
+          for (var i = 0; i < _tab.length; i++) {
+            if (target == _tab[i]) {
+              hideTabContent(0, tabContent);
+              showTabContent(i, tabContent);
+              break;
+            }
+          }
+        };
+
+        tab(tabImg, tabContent);
+        tab(tabText, tabContent);
+        tab(tabText2, tabContent2);
+        tab(tabImg3, tabContent3);
+      }
+    });
+  }
+
+  ;
+  wrap(info);
+  wrap(info2);
+  wrap(info3); //Табы, добовляющие стиль
+
+  var slideIndex = 1;
+  showSlides(slideIndex);
+
+  function showSlides(slideIndex) {
+    tabText2.forEach(function (item) {
+      return item.parentNode.classList.remove('after_click');
+    });
+    tabText2[slideIndex - 1].parentNode.classList.add('after_click');
+  }
+
+  info2.addEventListener('click', function (event) {
+    for (var i = 0; i < tabText2.length + 1; i++) {
+      if (event.target.classList.contains('decoration_slider-link') && event.target == tabText2[i - 1]) {
+        showSlides(i);
+      }
+    }
+  }); //Увеличение картинок остекления в калькуляторе
+
+  var imgIndex = 1;
+  activeImg(imgIndex);
+
+  function activeImg(imgIndex) {
+    tabImg3.forEach(function (item) {
+      return item.classList.remove('do_image_more');
+    });
+    tabImg3[imgIndex - 1].classList.add('do_image_more');
+  }
+
+  info3.addEventListener('click', function (event) {
+    for (var i = 0; i < tabImg3.length + 1; i++) {
+      if (event.target.classList.contains('type_img') && event.target == tabImg3[i - 1]) {
+        activeImg(i);
+      }
+    }
+  });
 }
 
 module.exports = tabs;
