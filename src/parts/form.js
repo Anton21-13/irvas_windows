@@ -25,9 +25,9 @@ function form(windowSettings) {
 	sendForm(popupCalcEndForms, windowSettings);
 
 
-	let popupCalcEnd = document.querySelector('.popup_calc_end'),
-	  overlay = document.querySelector('.popup_engineer'),
-    popup = document.querySelector('.popup');
+	// let popupCalcEnd = document.querySelector('.popup_calc_end'),
+	//   overlay = document.querySelector('.popup_engineer'),
+  //   popup = document.querySelector('.popup');
 
 	function sendForm(form, object = null) {
 		let statusMessage = document.createElement('div'),

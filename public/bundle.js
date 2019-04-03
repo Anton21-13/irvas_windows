@@ -1717,10 +1717,9 @@ function form(windowSettings) {
   sendForm(popupEngineerForm); // Формы модальных окон "Отправка калькулятора"
 
   var popupCalcEndForms = document.querySelector('.popup_calc_end form');
-  sendForm(popupCalcEndForms, windowSettings);
-  var popupCalcEnd = document.querySelector('.popup_calc_end'),
-      overlay = document.querySelector('.popup_engineer'),
-      popup = document.querySelector('.popup');
+  sendForm(popupCalcEndForms, windowSettings); // let popupCalcEnd = document.querySelector('.popup_calc_end'),
+  //   overlay = document.querySelector('.popup_engineer'),
+  //   popup = document.querySelector('.popup');
 
   function sendForm(form) {
     var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
