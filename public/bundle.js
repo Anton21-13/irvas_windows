@@ -1891,7 +1891,7 @@ function modal() {
     } else {
       popupModal.style.display = "block";
     }
-  }, 20 * 1000);
+  }, 60 * 1000);
 }
 
 module.exports = modal;
