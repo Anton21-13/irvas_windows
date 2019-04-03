@@ -1614,6 +1614,7 @@ function calc() {
     element.addEventListener('click', function () {
       popupCalc.style.display = "block";
       windowSettings.type = balconIcons[0].getAttribute('class');
+      document.body.style.overflow = "hidden";
     });
   });
   balconIcons.forEach(function (element) {
@@ -1622,6 +1623,7 @@ function calc() {
         img.querySelector('img').classList.remove('do_image_more');
       });
       event.preventDefault();
+      document.body.style.overflow = "hidden";
       var typeWindowCalc = event.target.parentNode.getAttribute('class');
       bigImg.forEach(function (el) {
         var typeSelectedWindow = el.getAttribute('id');
@@ -1642,6 +1644,8 @@ function calc() {
     });
   });
   popupCalcButton.addEventListener('click', function () {
+    document.body.style.overflow = "hidden";
+
     if (popupCalcInput[0].value && popupCalcInput[1].value) {
       popupCalc.style.display = 'none';
       popupCalcProfile.style.display = 'block';
@@ -1674,6 +1678,8 @@ function calc() {
     });
   });
   popupCalcProfileButton.addEventListener('click', function () {
+    document.body.style.overflow = "";
+
     if (windowSettings.glazingProfile) {
       popupCalcProfile.style.display = 'none';
       popupCalcEnd.style.display = 'block';
@@ -1868,6 +1874,7 @@ function modal() {
       popupEngineer = document.querySelector('.popup_engineer');
   engineerButton.addEventListener('click', function () {
     popupEngineer.style.display = "block";
+    document.body.style.overflow = "hidden";
   });
   closeModal(popupEngineer, 'popup_engineer', 'popup_close');
   var phoneLink = document.querySelectorAll('.phone_link'),
@@ -1876,6 +1883,7 @@ function modal() {
     element.addEventListener('click', function () {
       event.preventDefault();
       popupModal.style.display = "block";
+      document.body.style.overflow = "hidden";
     });
   });
   closeModal(popupModal, 'popup', 'popup_close');
@@ -1889,6 +1897,7 @@ function modal() {
   function closeModal(trigger, selector, closeSelector) {
     trigger.addEventListener('click', function (event) {
       var target = event.target;
+      document.body.style.overflow = "";
 
       if (target.classList.contains(closeSelector) || target.parentNode.classList.contains(closeSelector) || target.classList.contains(selector)) {
         trigger.style.display = 'none';
@@ -1901,6 +1910,7 @@ function modal() {
       return;
     } else {
       popupModal.style.display = "block";
+      document.body.style.overflow = "hidden";
     }
   }, 60 * 1000);
 }

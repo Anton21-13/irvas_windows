@@ -6,6 +6,7 @@ function modal() {
 
 	engineerButton.addEventListener('click', () => {
 		popupEngineer.style.display = "block";
+		document.body.style.overflow = "hidden";
 	});
 
 	closeModal(popupEngineer, 'popup_engineer', 'popup_close');
@@ -18,6 +19,7 @@ function modal() {
 		element.addEventListener('click', () => {
 			event.preventDefault();
 			popupModal.style.display = "block";
+			document.body.style.overflow = "hidden";
 		});
 	});
 
@@ -37,6 +39,7 @@ function modal() {
 	function closeModal (trigger, selector, closeSelector){
 		trigger.addEventListener('click', (event) => {
 			let target = event.target;
+			document.body.style.overflow = "";
 	
 			if (target.classList.contains(closeSelector) ||
 				target.parentNode.classList.contains(closeSelector) ||
@@ -54,6 +57,7 @@ function modal() {
 			return;
 		} else {
 		popupModal.style.display = "block";
+		document.body.style.overflow = "hidden";
 		}
 	}, 60 * 1000);	
 

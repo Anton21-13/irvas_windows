@@ -20,16 +20,18 @@ function calc() {
 		element.addEventListener('click', () => {
 			popupCalc.style.display = "block";
 			windowSettings.type = balconIcons[0].getAttribute('class');
+			document.body.style.overflow = "hidden";
 		});
 	});
 
 
-	balconIcons.forEach(element => {
+	balconIcons.forEach(element => {		
 		element.addEventListener('click', (event) => {
-			balconIcons.forEach( img => {
+      balconIcons.forEach( img => {
 				img.querySelector('img').classList.remove('do_image_more');
 			});
 			event.preventDefault();
+			document.body.style.overflow = "hidden";
 			const typeWindowCalc = event.target.parentNode.getAttribute('class');
 			bigImg.forEach(el => {
 				const typeSelectedWindow = el.getAttribute('id');
@@ -53,6 +55,7 @@ function calc() {
 
 
 	popupCalcButton.addEventListener('click', () => {
+		document.body.style.overflow = "hidden";
 		if (popupCalcInput[0].value && popupCalcInput[1].value) {
 			popupCalc.style.display = 'none';
 			popupCalcProfile.style.display = 'block';
@@ -61,6 +64,7 @@ function calc() {
 			windowSettings.heigh = popupCalcInput[1].value;
 			popupCalcInput[1].value = '';
 			windowSettings.glazingType = popupCalcSelect.options[0].value;
+			
 		} else {
 			popupCalcInput.forEach(input => {
 				if (!input.value) {
@@ -88,10 +92,12 @@ function calc() {
 
 
 	popupCalcProfileButton.addEventListener('click', () => {
+		document.body.style.overflow = "";
 		if (windowSettings.glazingProfile) {
 			popupCalcProfile.style.display = 'none';
 			popupCalcEnd.style.display = 'block';
 			document.querySelectorAll('.checkbox').forEach(c => c.checked = false);
+
 		}
 	});
 
