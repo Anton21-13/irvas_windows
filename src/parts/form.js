@@ -93,6 +93,7 @@ function form(windowSettings) {
 		for (let i = 0; i < inputs.length; i++) {
 			inputs[i].value = '';
 		}
+		statusMessage.innerHTML = '';
 	}
 
 	function clearObject(object) {

@@ -1784,6 +1784,8 @@ function form(windowSettings) {
     for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = '';
     }
+
+    statusMessage.innerHTML = '';
   }
 
   function clearObject(object) {
