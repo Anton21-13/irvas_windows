@@ -4,11 +4,12 @@ function form(windowSettings) {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...',
+    buy: '',
 };
 	
 	//Формы на сайте
 	let freeMasterForms = document.querySelectorAll('.main_form');
-	freeMasterForms.forEach(form => {
+	  freeMasterForms.forEach(form => {
 		sendForm(form);
 	});
 
@@ -36,17 +37,26 @@ function form(windowSettings) {
 		form.addEventListener('submit', event => {
 			event.preventDefault();
 			form.appendChild(statusMessage);
-      let formData = new FormData(form);
+			let formData = new FormData(form);
+			
+			function clearInput(inputs) {
+				for (let i = 0; i < inputs.length; i++) {
+					inputs[i].value = '';
+				}
+				statusMessage.innerHTML = '';
+			}
       
 			postData(formData, object)
         // .then(() => statusMessage.innerHTML = message.loading)
         .then(() => {
 					statusMessage.innerHTML = message.success;
-					// setTimeout(send, 4000);
 				})
 				.catch(() => statusMessage.innerHTML = message.failure)
 				.then(clearInput(curentFormInputs))
-				.then(clearObject(object));
+				.then(clearObject(object))
+				.then(setTimeout(() => {
+					statusMessage.innerHTML = message.buy;
+					}, 4 * 1000));
 		});
 	}
 
@@ -89,12 +99,12 @@ function form(windowSettings) {
 		}
 	}
 
-	function clearInput(inputs) {
-		for (let i = 0; i < inputs.length; i++) {
-			inputs[i].value = '';
-		}
-		statusMessage.innerHTML = '';
-	}
+	// function clearInput(inputs) {
+	// 	for (let i = 0; i < inputs.length; i++) {
+	// 		inputs[i].value = '';
+	// 	}
+	// 	statusMessage.innerHTML = '';
+	// }
 
 	function clearObject(object) {
 		object = {};

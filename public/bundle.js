@@ -1702,7 +1702,8 @@ function form(windowSettings) {
   var message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
-    failure: 'Что-то пошло не так...'
+    failure: 'Что-то пошло не так...',
+    buy: ''
   }; //Формы на сайте
 
   var freeMasterForms = document.querySelectorAll('.main_form');
@@ -1729,12 +1730,23 @@ function form(windowSettings) {
       event.preventDefault();
       form.appendChild(statusMessage);
       var formData = new FormData(form);
+
+      function clearInput(inputs) {
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].value = '';
+        }
+
+        statusMessage.innerHTML = '';
+      }
+
       postData(formData, object) // .then(() => statusMessage.innerHTML = message.loading)
       .then(function () {
-        statusMessage.innerHTML = message.success; // setTimeout(send, 4000);
+        statusMessage.innerHTML = message.success;
       }).catch(function () {
         return statusMessage.innerHTML = message.failure;
-      }).then(clearInput(curentFormInputs)).then(clearObject(object));
+      }).then(clearInput(curentFormInputs)).then(clearObject(object)).then(setTimeout(function () {
+        statusMessage.innerHTML = message.buy;
+      }, 4 * 1000));
     });
   }
 
@@ -1778,15 +1790,13 @@ function form(windowSettings) {
     } else {
       return JSON.stringify(obj);
     }
-  }
+  } // function clearInput(inputs) {
+  // 	for (let i = 0; i < inputs.length; i++) {
+  // 		inputs[i].value = '';
+  // 	}
+  // 	statusMessage.innerHTML = '';
+  // }
 
-  function clearInput(inputs) {
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = '';
-    }
-
-    statusMessage.innerHTML = '';
-  }
 
   function clearObject(object) {
     object = {};
