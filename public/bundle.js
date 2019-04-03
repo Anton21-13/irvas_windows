@@ -1718,6 +1718,9 @@ function form(windowSettings) {
 
   var popupCalcEndForms = document.querySelector('.popup_calc_end form');
   sendForm(popupCalcEndForms, windowSettings);
+  var popupCalcEnd = document.querySelector('.popup_calc_end'),
+      overlay = document.querySelector('.popup_engineer'),
+      popup = document.querySelector('.popup');
 
   function sendForm(form) {
     var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -1727,10 +1730,9 @@ function form(windowSettings) {
       event.preventDefault();
       form.appendChild(statusMessage);
       var formData = new FormData(form);
-      postData(formData, object).then(function () {
-        return statusMessage.innerHTML = message.loading;
-      }).then(function () {
-        return statusMessage.innerHTML = message.success;
+      postData(formData, object) // .then(() => statusMessage.innerHTML = message.loading)
+      .then(function () {
+        statusMessage.innerHTML = message.success; // setTimeout(send, 4000);
       }).catch(function () {
         return statusMessage.innerHTML = message.failure;
       }).then(clearInput(curentFormInputs)).then(clearObject(object));
@@ -1757,7 +1759,13 @@ function form(windowSettings) {
 
       request.send(json);
     });
-  }
+  } // function send() {
+  // 	statusMessage.innerHTML = "";
+  // 	popupCalcEnd.style.display = 'none';
+  // 	overlay.style.display = 'none';
+  // 	popup.style.display = 'none';
+  // }	
+
 
   function formDataToJSON(formData) {
     var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -1878,8 +1886,12 @@ function modal() {
   }
 
   setTimeout(function () {
-    popupModal.style.display = "block";
-  }, 60 * 1000);
+    if (popupEngineer.style.display === "block" || popupModal.style.display === "block" || popupCalcEnd.style.display === "block") {
+      return;
+    } else {
+      popupModal.style.display = "block";
+    }
+  }, 20 * 1000);
 }
 
 module.exports = modal;

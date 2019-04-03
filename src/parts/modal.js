@@ -48,8 +48,15 @@ function modal() {
 
 
 	setTimeout(() => {
+		if (popupEngineer.style.display === "block" 
+			|| popupModal.style.display === "block"
+			|| popupCalcEnd.style.display === "block") {
+			return;
+		} else {
 		popupModal.style.display = "block";
-	}, 60 * 1000);
+		}
+	}, 20 * 1000);	
+
 }
 
 module.exports = modal;

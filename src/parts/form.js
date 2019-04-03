@@ -24,6 +24,11 @@ function form(windowSettings) {
 	let popupCalcEndForms = document.querySelector('.popup_calc_end form');
 	sendForm(popupCalcEndForms, windowSettings);
 
+
+	let popupCalcEnd = document.querySelector('.popup_calc_end'),
+	  overlay = document.querySelector('.popup_engineer'),
+    popup = document.querySelector('.popup');
+
 	function sendForm(form, object = null) {
 		let statusMessage = document.createElement('div'),
 			curentFormInputs = form.querySelectorAll('input');
@@ -34,8 +39,11 @@ function form(windowSettings) {
       let formData = new FormData(form);
       
 			postData(formData, object)
-        .then(() => statusMessage.innerHTML = message.loading)
-        .then(() => statusMessage.innerHTML = message.success)
+        // .then(() => statusMessage.innerHTML = message.loading)
+        .then(() => {
+					statusMessage.innerHTML = message.success;
+					// setTimeout(send, 4000);
+				})
 				.catch(() => statusMessage.innerHTML = message.failure)
 				.then(clearInput(curentFormInputs))
 				.then(clearObject(object));
@@ -61,6 +69,14 @@ function form(windowSettings) {
 		});
 	}
 
+	
+	// function send() {
+	// 	statusMessage.innerHTML = "";
+	// 	popupCalcEnd.style.display = 'none';
+	// 	overlay.style.display = 'none';
+	// 	popup.style.display = 'none';
+	// }	
+
 	function formDataToJSON(formData, object = null) {
 		let obj = {};
 		formData.forEach((value, key) => {
@@ -71,7 +87,6 @@ function form(windowSettings) {
 		} else {
 			return JSON.stringify(obj);
 		}
-
 	}
 
 	function clearInput(inputs) {
