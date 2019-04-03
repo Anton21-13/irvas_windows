@@ -13,27 +13,6 @@ body {
   color: #000000;
 }
 
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-.text {
-  color: #0089cd;
-}
-
-.big_img {
-  height: 70%;
-  position: fixed;
-  top: 12%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-
 .status {
   display: block;
   color: red;
@@ -561,7 +540,7 @@ textarea:focus {
 }
 
 .decoration_item .no_click {
-  /* border: 1px solid red; */
+  /*border: 1px solid red;*/
   height: 8rem;
   padding: 2rem 0;
   border-top: 1rem solid #f7f7f7;
@@ -622,8 +601,8 @@ textarea:focus {
   margin-bottom: 3rem;
 }
 
-.works a[data-fancybox="gallery"] .lupa {
-  /* position: ; */
+.works a .lupa {
+  position: absolute;
   top: 0;
   left: 0;
   left: 50%;
@@ -635,7 +614,7 @@ textarea:focus {
   transition: ease 0.2s;
 }
 
-.works a[data-fancybox="gallery"]:hover .lupa {
+.works a:hover .lupa {
   opacity: 1;
 }
 
@@ -717,7 +696,7 @@ textarea:focus {
 
 
 /* Timer */
- .timer1 {
+.timer1 {
   padding: 10px;
   border: 1px solid grey;
   background-color: white;
@@ -732,25 +711,34 @@ textarea:focus {
   display: inline-block;
 
 }
+
 .numbers1 {
   display: block;
-  float: left;  
+  float: left;
   color: white;
   font-size: 40px;
   margin-right: 10px;
 }
 
-.timer1 span{
+.timer1 span {
   margin-right: 2px;
   background-color: #575757;
   border-radius: 7px;
   padding: 4px;
 }
-.description1{
+
+.description1 {
   font-size: 18px;
   text-align: center;
   color: black;
 }
+
+
+
+
+
+
+
 
 /*Contacts*/
 .contacts {

@@ -27,7 +27,8 @@ module.exports = {
 									}
 								}
 							]
-						]
+						],
+						plugins: ["es6-promise"]
 					}
 				}
 			}

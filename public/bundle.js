@@ -1309,25 +1309,6 @@ W&&(X.prototype[W]="FormData");T&&(R.XMLHttpRequest.prototype.send=function(c){c
 
 /***/ }),
 
-/***/ "../node_modules/nodelist-foreach-polyfill/index.js":
-/*!**********************************************************!*\
-  !*** ../node_modules/nodelist-foreach-polyfill/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-        thisArg = thisArg || window;
-        for (var i = 0; i < this.length; i++) {
-            callback.call(thisArg, this[i], i, this);
-        }
-    };
-}
-
-
-/***/ }),
-
 /***/ "../node_modules/process/browser.js":
 /*!******************************************!*\
   !*** ../node_modules/process/browser.js ***!
@@ -1558,44 +1539,45 @@ module.exports = g;
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nodelist-foreach-polyfill */ "../node_modules/nodelist-foreach-polyfill/index.js");
-/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+
+
 __webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").polyfill();
-
-
 
 __webpack_require__(/*! formdata-polyfill */ "../node_modules/formdata-polyfill/formdata.min.js");
 
 window.addEventListener('DOMContentLoaded', function () {
-  'use strict';
-
   var calc = __webpack_require__(/*! ./parts/calc */ "./parts/calc.js"),
       modal = __webpack_require__(/*! ./parts/modal */ "./parts/modal.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./parts/tabs.js"),
       pictures = __webpack_require__(/*! ./parts/pictures */ "./parts/pictures.js"),
       form = __webpack_require__(/*! ./parts/form */ "./parts/form.js"),
+      input = __webpack_require__(/*! ./parts/input */ "./parts/input.js"),
       timer = __webpack_require__(/*! ./parts/timer */ "./parts/timer.js");
 
-  calc();
-  form();
+  var windowSettings = calc();
+  form(windowSettings);
   modal();
   tabs();
+  input();
   pictures();
   timer();
-}); // if ('NodeList' in window && !NodeList.prototype.forEach) {
-//   console.info('polyfill for IE11');
-//   NodeList.prototype.forEach = function (callback, thisArg) {
-//     thisArg = thisArg || window;
-//     for (var i = 0; i < this.length; i++) {
-//       callback.call(thisArg, this[i], i, this);
-//     }
-//   };
-// }
+});
+
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+  console.info('polyfill for IE11');
+
+  NodeList.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
+
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
 
 /***/ }),
 
@@ -1712,7 +1694,9 @@ module.exports = calc;
   !*** ./parts/form.js ***!
   \***********************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
 function form(windowSettings) {
   var message = {
@@ -1755,7 +1739,7 @@ function form(windowSettings) {
 
   function postData(data) {
     var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    return new Promise(function (resolve, reject) {
+    return new _Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
       request.open('POST', 'server.php');
       request.setRequestHeader('Content-Type', 'aplication/json charset=utf-8');
@@ -1801,6 +1785,55 @@ function form(windowSettings) {
 }
 
 module.exports = form;
+
+/***/ }),
+
+/***/ "./parts/input.js":
+/*!************************!*\
+  !*** ./parts/input.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function input() {
+  var userPhones = document.querySelectorAll('input');
+  userPhones.forEach(function (element) {
+    if (element.getAttribute('name') === 'user_phone') {
+      element.addEventListener("focus", mask);
+      element.addEventListener("input", mask);
+      element.addEventListener("blur", mask);
+    }
+  });
+
+  function mask(event) {
+    var matrix = "+7 (___) ___-__-__",
+        curentSimvol = 0,
+        onlyNumbers = matrix.replace(/\D/g, ""),
+        value = this.value.replace(/\D/g, "");
+
+    if (onlyNumbers.length >= value.length) {
+      value = onlyNumbers;
+    }
+
+    this.value = matrix.replace(/./g, function (a) {
+      if (/[_\d]/.test(a) && curentSimvol < value.length) {
+        return value.charAt(curentSimvol++);
+      } else if (curentSimvol >= value.length) {
+        return '';
+      } else {
+        return a;
+      }
+    });
+
+    if (event.type == "blur") {
+      if (this.value.length <= 3) {
+        this.value = "";
+      }
+    }
+  }
+}
+
+module.exports = input;
 
 /***/ }),
 
@@ -1861,49 +1894,27 @@ module.exports = modal;
 /***/ (function(module, exports) {
 
 function pictures() {
-  // let works = document.querySelectorAll('.works .row div');
-  // works.forEach((work) => {
-  //   work.addEventListener('click', (e) => {
-  //     e.preventDefault();
-  //     let popupImage = document.createElement('div');
-  //     let curentImage = document.createElement('img');
-  //     let curentImageHref = work.querySelector('a').getAttribute('href');
-  //     popupImage.classList.add('popup');
-  //     curentImage.setAttribute('src', curentImageHref);
-  //     popupImage.appendChild(curentImage);
-  //     document.body.appendChild(popupImage);
-  //     popupImage.style.display = 'flex';
-  //     popupImage.style.alignItems = 'center';
-  //     popupImage.style.justifyContent = 'center';
-  //     popupImage.addEventListener('click', (e) => {
-  //       if (e.target.classList.contains('popup')) {
-  //         popupImage.style.display = 'none';
-  //         document.body.removeChild(popupImage);
-  //       }
-  //     });
-  //   });
-  // });
-  var overlay = document.createElement('div');
-  overlay.classList.add('works_overlay');
-  document.body.addEventListener('click', function (e) {
-    var t = e.target;
-
-    if (t.classList.contains('works_overlay')) {
-      overlay.parentElement.removeChild(overlay);
-      document.body.parentElement.style.overflow = '';
-    }
-
-    if (t.classList.contains('lightbox') && t.tagName == 'IMG' && !t.classList.contains('lupa')) {
-      e.preventDefault();
-      overlay.innerHTML = '';
-      var block = document.createElement('img'),
-          tsrc = t.getAttribute('src');
-      tsrc = tsrc.slice(0, 13) + "/big_img" + tsrc.slice(13, tsrc.length);
-      block.setAttribute("src", tsrc);
-      overlay.appendChild(block);
-      document.body.appendChild(overlay);
-      document.body.parentElement.style.overflow = 'hidden';
-    }
+  var works = document.querySelectorAll('.works .row div');
+  works.forEach(function (work) {
+    work.addEventListener('click', function (event) {
+      event.preventDefault();
+      var popupImage = document.createElement('div');
+      var curentImage = document.createElement('img');
+      var curentImageHref = work.querySelector('a').getAttribute('href');
+      popupImage.classList.add('popup');
+      curentImage.setAttribute('src', curentImageHref);
+      popupImage.appendChild(curentImage);
+      document.body.appendChild(popupImage);
+      popupImage.style.display = 'flex';
+      popupImage.style.alignItems = 'center';
+      popupImage.style.justifyContent = 'center';
+      popupImage.addEventListener('click', function (event) {
+        if (event.target.classList.contains('popup')) {
+          popupImage.style.display = 'none';
+          document.body.removeChild(popupImage);
+        }
+      });
+    });
   });
 }
 
@@ -2043,8 +2054,8 @@ function timer() {
     var timer = document.getElementById(id),
         days = timer.querySelector('#days'),
         hours = timer.querySelector('#hours'),
-        minutes = timer.querySelector('#minutes'),
-        seconds = timer.querySelector('#seconds'),
+        minutes = timer.querySelector('#minutes').firstChild,
+        seconds = timer.querySelector('#seconds').firstChild,
         timeInterval = setInterval(updateClock, 1000);
 
     function updateClock() {

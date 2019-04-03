@@ -38,8 +38,8 @@ function timer() {
     let timer = document.getElementById(id),
       days = timer.querySelector('#days'),
       hours = timer.querySelector('#hours'),
-      minutes = timer.querySelector('#minutes'),
-      seconds = timer.querySelector('#seconds'),
+      minutes = timer.querySelector('#minutes').firstChild,
+      seconds = timer.querySelector('#seconds').firstChild,
       timeInterval = setInterval(updateClock, 1000);
 
     function updateClock() {
