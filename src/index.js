@@ -1,11 +1,12 @@
-
+require('es6-promise').polyfill();
+import 'nodelist-foreach-polyfill';
+require('formdata-polyfill');
 window.addEventListener('DOMContentLoaded', () => {
 
   'use strict';
 
   let calc = require('./parts/calc'),
     modal = require('./parts/modal'),
-    slider = require('./parts/slider'),
     tabs = require('./parts/tabs'),
     pictures = require('./parts/pictures'),
     form = require('./parts/form'),
@@ -14,7 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
   calc();
   form();
   modal();
-  slider();
   tabs();
   pictures();
   timer();
@@ -22,13 +22,13 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-if ('NodeList' in window && !NodeList.prototype.forEach) {
-  console.info('polyfill for IE11');
-  NodeList.prototype.forEach = function (callback, thisArg) {
-    thisArg = thisArg || window;
-    for (var i = 0; i < this.length; i++) {
-      callback.call(thisArg, this[i], i, this);
-    }
-  };
-}
+// if ('NodeList' in window && !NodeList.prototype.forEach) {
+//   console.info('polyfill for IE11');
+//   NodeList.prototype.forEach = function (callback, thisArg) {
+//     thisArg = thisArg || window;
+//     for (var i = 0; i < this.length; i++) {
+//       callback.call(thisArg, this[i], i, this);
+//     }
+//   };
+// }
 

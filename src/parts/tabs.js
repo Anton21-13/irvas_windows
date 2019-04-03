@@ -1,123 +1,75 @@
+'use strict';
+
 function tabs() {
 
-  //Табы остекления
-  let info = document.querySelector('.glazing_slider'),
-    tabImg = document.querySelectorAll('.img'),
-    tabText = document.querySelectorAll('.tab-link'),
-    tabContent = document.querySelectorAll('.info-tabcontent-1');
+	let glazingSlider = document.querySelector('.glazing_slider'),
+		glazingBlock = document.querySelectorAll('.glazing_block'),
+		glazingRow = document.querySelectorAll('.glazing .row');
 
-  //Табы отделки
-  let info2 = document.querySelector('.decoration_slider'),
-    tabText2 = document.querySelectorAll('.decoration_slider-link'),
-    tabContent2 = document.querySelectorAll('.info-tabcontent-2');
+	hideTabContent(1, glazingRow);
 
+	glazingSlider.addEventListener('click', (event) => {
+		let target = event.target;
+		if (!target.classList.contains('glazing_block')) {
+			target = target.parentNode;
+		}
 
-  // табы в калькуляторе
-  let info3 = document.querySelector('.balcon_icons'),
-    tabLinck = info3.querySelectorAll('.balcon_icons a'),
-    tabImg3 = info3.querySelectorAll('.type_img'),
-    tabContent3 = document.querySelectorAll('.big_img-item');
-
-  tabLinck.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-    });
-  })
-
-  function hideTabContent(a, b) {
-    for (let i = a; i < b.length; i++) {
-      b[i].classList.remove('show');
-      b[i].classList.add('hide');
-      if (b[i].classList.contains('big_img-item')) {
-        b[i].style.margin = 'auto';
-        b[i].style.marginBottom = '10px';
-      }
-    }
-  }
-
-  hideTabContent(1, tabContent);
-  hideTabContent(1, tabContent2);
-  hideTabContent(1, tabContent3);
+		if (target) {
+			for (let i = 0; i < glazingBlock.length; i++) {
+				glazingBlock[i].querySelector('a').classList.remove('active');
+				if (glazingBlock[i] == target) {
+					hideTabContent(0, glazingRow);
+					showTabContent(i, glazingRow);
+				}
+			}
+			target.querySelector('a').classList.add('active');
+		}
+	});
 
 
-  function showTabContent(b, c) {
-    if (c[b].classList.contains('hide')) {
-      c[b].classList.add('show');
-      c[b].classList.remove('hide');
-    }
-  }
+  let decorationSlider = document.querySelector('.decoration_slider'),
+		decorationItem = document.querySelectorAll('.decoration_item'),
+		decorationRow = document.querySelectorAll('.decoration_row');
+	
+	
+	decorationSlider.querySelectorAll('a')[0].focus();
 
-  function wrap(params) {
+	hideTabContent(1, decorationRow);
 
-    params.addEventListener('click', (event) => {
-      let target = event.target;
+	decorationSlider.addEventListener('click', (event) => {
+		let target = event.target;
+		if (!target.classList.contains('no_click') && !target.classList.contains('after_click')) {
+			target = target.parentNode;
+		}
+		target = target.parentNode;
+		if (!target.querySelector('div').classList.contains('after_click')) {
+			for (let i = 0; i < decorationItem.length; i++) {
+				decorationItem[i].querySelector('div').classList.remove('after_click');
+				decorationItem[i].querySelector('div').classList.add('no_click');
+				if (decorationItem[i] == target) {
+					hideTabContent(0, decorationRow);
+					showTabContent(i, decorationRow);
+				}
+			}
+			target.querySelector('div').classList.add('after_click');
+			target.querySelector('div').classList.remove('no_click');
+		}
+		target.querySelector('a').focus();
+	});
 
-			if (target || target.classList.contains('glazing_block') 
-			  || target.classList.contains('tab-link') 
-				|| target.classList.contains('img') 
-				|| target.classList.contains('decoration_slider-link')) {
+	function hideTabContent(key, slideItems) {
+		for (let i = key; i < slideItems.length; i++) {
+			slideItems[i].classList.remove('show');
+			slideItems[i].classList.add('hide');
+		}
+	}
 
-        function tab(tab, tabContent) {
-          for (let i = 0; i < tab.length; i++) {
-
-            if (target == tab[i]) {
-              hideTabContent(0, tabContent);
-              showTabContent(i, tabContent);
-              break;
-            }
-          }
-        }
-
-        tab(tabImg, tabContent);
-        tab(tabText, tabContent);
-
-        tab(tabText2, tabContent2);
-
-        tab(tabImg3, tabContent3);
-
-      }
-    });
-  };
-
-  wrap(info);
-  wrap(info2);
-  wrap(info3);
-
-
-
-  //Табы, добовляющие стиль
-  let slideIndex = 1;
-  showSlides(slideIndex);
-
-  function showSlides(slideIndex) {
-    tabText2.forEach((item) => item.parentNode.classList.remove('after_click'));
-    tabText2[slideIndex - 1].parentNode.classList.add('after_click');
-  }
-  info2.addEventListener('click', function (event) {
-    for (let i = 0; i < tabText2.length + 1; i++) {
-			if (event.target.classList.contains('decoration_slider-link') 
-			 && event.target == tabText2[i - 1]) {
-        showSlides(i);
-      }
-    }
-  });
-
-  //Увеличение картинок остекления в калькуляторе
-  let imgIndex = 1;
-  activeImg(imgIndex);
-
-  function activeImg(imgIndex) {
-    tabImg3.forEach((item) => item.classList.remove('do_image_more'));
-    tabImg3[imgIndex - 1].classList.add('do_image_more');
-  }
-  info3.addEventListener('click', function (event) {
-    for (let i = 0; i < tabImg3.length + 1; i++) {
-      if (event.target.classList.contains('type_img') && event.target == tabImg3[i - 1]) {
-        activeImg(i);
-      }
-    }
-  })
-
+	function showTabContent(key, slideItems) {
+		if (slideItems[key].classList.contains('hide')) {
+			slideItems[key].classList.remove('hide');
+			slideItems[key].classList.add('show');
+		}
+	}
 }
 
 module.exports = tabs;

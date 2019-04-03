@@ -1,7 +1,7 @@
 {
   "name": "irvas_windows",
   "version": "1.0.0",
-  "description": "",
+  "description": "Дипломный проект JS-6.0",
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
@@ -18,13 +18,17 @@
     "url": "https://github.com/Anton21-13/irvas_windows/issues"
   },
   "homepage": "https://github.com/Anton21-13/irvas_windows#readme",
+  "dependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-es6-promise": "^1.1.1",
     "es6-promise": "^4.2.6",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "formdata-polyfill": "^3.0.17",
+    "nodelist-foreach-polyfill": "^1.2.0"
   }
 }

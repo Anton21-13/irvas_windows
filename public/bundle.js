@@ -1280,6 +1280,54 @@ return Promise$1;
 
 /***/ }),
 
+/***/ "../node_modules/formdata-polyfill/formdata.min.js":
+/*!*********************************************************!*\
+  !*** ../node_modules/formdata-polyfill/formdata.min.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {;(function(){var k;function l(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}}var m="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,e){a!=Array.prototype&&a!=Object.prototype&&(a[b]=e.value)},n="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this;function p(){p=function(){};n.Symbol||(n.Symbol=r)}var r=function(){var a=0;return function(b){return"jscomp_symbol_"+(b||"")+a++}}();
+function u(){p();var a=n.Symbol.iterator;a||(a=n.Symbol.iterator=n.Symbol("iterator"));"function"!=typeof Array.prototype[a]&&m(Array.prototype,a,{configurable:!0,writable:!0,value:function(){return v(l(this))}});u=function(){}}function v(a){u();a={next:a};a[n.Symbol.iterator]=function(){return this};return a}function x(a){var b="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];return b?b.call(a):{next:l(a)}}var y;
+if("function"==typeof Object.setPrototypeOf)y=Object.setPrototypeOf;else{var z;a:{var A={s:!0},B={};try{B.__proto__=A;z=B.s;break a}catch(a){}z=!1}y=z?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}var C=y;function D(){this.h=!1;this.c=null;this.o=void 0;this.b=1;this.m=this.u=0;this.g=null}function E(a){if(a.h)throw new TypeError("Generator is already running");a.h=!0}D.prototype.i=function(a){this.o=a};
+D.prototype.j=function(a){this.g={v:a,w:!0};this.b=this.u||this.m};D.prototype["return"]=function(a){this.g={"return":a};this.b=this.m};function F(a,b,e){a.b=e;return{value:b}}function G(a){this.A=a;this.l=[];for(var b in a)this.l.push(b);this.l.reverse()}function H(a){this.a=new D;this.B=a}H.prototype.i=function(a){E(this.a);if(this.a.c)return I(this,this.a.c.next,a,this.a.i);this.a.i(a);return J(this)};
+function K(a,b){E(a.a);var e=a.a.c;if(e)return I(a,"return"in e?e["return"]:function(a){return{value:a,done:!0}},b,a.a["return"]);a.a["return"](b);return J(a)}H.prototype.j=function(a){E(this.a);if(this.a.c)return I(this,this.a.c["throw"],a,this.a.i);this.a.j(a);return J(this)};
+function I(a,b,e,c){try{var d=b.call(a.a.c,e);if(!(d instanceof Object))throw new TypeError("Iterator result "+d+" is not an object");if(!d.done)return a.a.h=!1,d;var f=d.value}catch(g){return a.a.c=null,a.a.j(g),J(a)}a.a.c=null;c.call(a.a,f);return J(a)}function J(a){for(;a.a.b;)try{var b=a.B(a.a);if(b)return a.a.h=!1,{value:b.value,done:!1}}catch(e){a.a.o=void 0,a.a.j(e)}a.a.h=!1;if(a.a.g){b=a.a.g;a.a.g=null;if(b.w)throw b.v;return{value:b["return"],done:!0}}return{value:void 0,done:!0}}
+function L(a){this.next=function(b){return a.i(b)};this["throw"]=function(b){return a.j(b)};this["return"]=function(b){return K(a,b)};u();this[Symbol.iterator]=function(){return this}}function M(a,b){var e=new L(new H(b));C&&C(e,a.prototype);return e}
+if("function"===typeof Blob&&("undefined"===typeof FormData||!FormData.prototype.keys)){var N=function(a,b){for(var e=0;e<a.length;e++)b(a[e])},O=function(a,b,e){return b instanceof Blob?[String(a),b,void 0!==e?e+"":"string"===typeof b.name?b.name:"blob"]:[String(a),String(b)]},P=function(a,b){if(a.length<b)throw new TypeError(b+" argument required, but only "+a.length+" present.");},Q=function(a){var b=x(a);a=b.next().value;b=b.next().value;a instanceof Blob&&(a=new File([a],b,{type:a.type,lastModified:a.lastModified}));
+return a},R="object"===typeof window?window:"object"===typeof self?self:this,S=R.FormData,T=R.XMLHttpRequest&&R.XMLHttpRequest.prototype.send,U=R.Request&&R.fetch,V=R.navigator&&R.navigator.sendBeacon;p();var W=R.Symbol&&Symbol.toStringTag;W&&(Blob.prototype[W]||(Blob.prototype[W]="Blob"),"File"in R&&!File.prototype[W]&&(File.prototype[W]="File"));try{new File([],"")}catch(a){R.File=function(b,e,c){b=new Blob(b,c);c=c&&void 0!==c.lastModified?new Date(c.lastModified):new Date;Object.defineProperties(b,
+{name:{value:e},lastModifiedDate:{value:c},lastModified:{value:+c},toString:{value:function(){return"[object File]"}}});W&&Object.defineProperty(b,W,{value:"File"});return b}}p();u();var X=function(a){this.f=Object.create(null);if(!a)return this;var b=this;N(a.elements,function(a){if(a.name&&!a.disabled&&"submit"!==a.type&&"button"!==a.type)if("file"===a.type){var c=a.files&&a.files.length?a.files:[new File([],"",{type:"application/octet-stream"})];N(c,function(c){b.append(a.name,c)})}else"select-multiple"===
+a.type||"select-one"===a.type?N(a.options,function(c){!c.disabled&&c.selected&&b.append(a.name,c.value)}):"checkbox"===a.type||"radio"===a.type?a.checked&&b.append(a.name,a.value):(c="textarea"===a.type?a.value.replace(/\r\n/g,"\n").replace(/\n/g,"\r\n"):a.value,b.append(a.name,c))})};k=X.prototype;k.append=function(a,b,e){P(arguments,2);var c=x(O.apply(null,arguments));a=c.next().value;b=c.next().value;e=c.next().value;c=this.f;c[a]||(c[a]=[]);c[a].push([b,e])};k["delete"]=function(a){P(arguments,
+1);delete this.f[String(a)]};k.entries=function b(){var e=this,c,d,f,g,h,q;return M(b,function(b){switch(b.b){case 1:c=e.f,f=new G(c);case 2:var t;a:{for(t=f;0<t.l.length;){var w=t.l.pop();if(w in t.A){t=w;break a}}t=null}if(null==(d=t)){b.b=0;break}g=x(c[d]);h=g.next();case 5:if(h.done){b.b=2;break}q=h.value;return F(b,[d,Q(q)],6);case 6:h=g.next(),b.b=5}})};k.forEach=function(b,e){P(arguments,1);for(var c=x(this),d=c.next();!d.done;d=c.next()){var f=x(d.value);d=f.next().value;f=f.next().value;
+b.call(e,f,d,this)}};k.get=function(b){P(arguments,1);var e=this.f;b=String(b);return e[b]?Q(e[b][0]):null};k.getAll=function(b){P(arguments,1);return(this.f[String(b)]||[]).map(Q)};k.has=function(b){P(arguments,1);return String(b)in this.f};k.keys=function e(){var c=this,d,f,g,h,q;return M(e,function(e){1==e.b&&(d=x(c),f=d.next());if(3!=e.b){if(f.done){e.b=0;return}g=f.value;h=x(g);q=h.next().value;return F(e,q,3)}f=d.next();e.b=2})};k.set=function(e,c,d){P(arguments,2);var f=O.apply(null,arguments);
+this.f[f[0]]=[[f[1],f[2]]]};k.values=function c(){var d=this,f,g,h,q,w;return M(c,function(c){1==c.b&&(f=x(d),g=f.next());if(3!=c.b){if(g.done){c.b=0;return}h=g.value;q=x(h);q.next();w=q.next().value;return F(c,w,3)}g=f.next();c.b=2})};X.prototype._asNative=function(){for(var c=new S,d=x(this),f=d.next();!f.done;f=d.next()){var g=x(f.value);f=g.next().value;g=g.next().value;c.append(f,g)}return c};X.prototype._blob=function(){for(var c="----formdata-polyfill-"+Math.random(),d=[],f=x(this),g=f.next();!g.done;g=
+f.next()){var h=x(g.value);g=h.next().value;h=h.next().value;d.push("--"+c+"\r\n");h instanceof Blob?d.push('Content-Disposition: form-data; name="'+g+'"; filename="'+h.name+'"\r\n',"Content-Type: "+(h.type||"application/octet-stream")+"\r\n\r\n",h,"\r\n"):d.push('Content-Disposition: form-data; name="'+g+'"\r\n\r\n'+h+"\r\n")}d.push("--"+c+"--");return new Blob(d,{type:"multipart/form-data; boundary="+c})};X.prototype[Symbol.iterator]=function(){return this.entries()};X.prototype.toString=function(){return"[object FormData]"};
+W&&(X.prototype[W]="FormData");T&&(R.XMLHttpRequest.prototype.send=function(c){c instanceof X?(c=c._blob(),this.setRequestHeader("Content-Type",c.type),T.call(this,c)):T.call(this,c)});if(U){var Y=R.fetch;R.fetch=function(c,d){d&&d.body&&d.body instanceof X&&(d.body=d.body._blob());return Y.call(this,c,d)}}V&&(R.navigator.sendBeacon=function(c,d){d instanceof X&&(d=d._asNative());return V.call(this,c,d)});R.FormData=X};
+})();
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "../node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "../node_modules/nodelist-foreach-polyfill/index.js":
+/*!**********************************************************!*\
+  !*** ../node_modules/nodelist-foreach-polyfill/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (callback, thisArg) {
+        thisArg = thisArg || window;
+        for (var i = 0; i < this.length; i++) {
+            callback.call(thisArg, this[i], i, this);
+        }
+    };
+}
+
+
+/***/ }),
+
 /***/ "../node_modules/process/browser.js":
 /*!******************************************!*\
   !*** ../node_modules/process/browser.js ***!
@@ -1510,15 +1558,24 @@ module.exports = g;
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nodelist-foreach-polyfill */ "../node_modules/nodelist-foreach-polyfill/index.js");
+/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+__webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").polyfill();
+
+
+
+__webpack_require__(/*! formdata-polyfill */ "../node_modules/formdata-polyfill/formdata.min.js");
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   var calc = __webpack_require__(/*! ./parts/calc */ "./parts/calc.js"),
       modal = __webpack_require__(/*! ./parts/modal */ "./parts/modal.js"),
-      slider = __webpack_require__(/*! ./parts/slider */ "./parts/slider.js"),
       tabs = __webpack_require__(/*! ./parts/tabs */ "./parts/tabs.js"),
       pictures = __webpack_require__(/*! ./parts/pictures */ "./parts/pictures.js"),
       form = __webpack_require__(/*! ./parts/form */ "./parts/form.js"),
@@ -1527,23 +1584,18 @@ window.addEventListener('DOMContentLoaded', function () {
   calc();
   form();
   modal();
-  slider();
   tabs();
   pictures();
   timer();
-});
-
-if ('NodeList' in window && !NodeList.prototype.forEach) {
-  console.info('polyfill for IE11');
-
-  NodeList.prototype.forEach = function (callback, thisArg) {
-    thisArg = thisArg || window;
-
-    for (var i = 0; i < this.length; i++) {
-      callback.call(thisArg, this[i], i, this);
-    }
-  };
-}
+}); // if ('NodeList' in window && !NodeList.prototype.forEach) {
+//   console.info('polyfill for IE11');
+//   NodeList.prototype.forEach = function (callback, thisArg) {
+//     thisArg = thisArg || window;
+//     for (var i = 0; i < this.length; i++) {
+//       callback.call(thisArg, this[i], i, this);
+//     }
+//   };
+// }
 
 /***/ }),
 
@@ -1582,16 +1634,11 @@ function calc() {
       windowSettings.type = balconIcons[0].getAttribute('class');
     });
   });
-  popupCalc.addEventListener('click', function (event) {
-    var target = event.target;
-
-    if (target.classList.contains('popup_calc_close') || target.parentNode.classList.contains('popup_calc_close') || target.classList.contains('popup_calc')) {
-      popupCalc.style.display = 'none';
-      windowSettings = {};
-    }
-  });
   balconIcons.forEach(function (element) {
     element.addEventListener('click', function (event) {
+      balconIcons.forEach(function (img) {
+        img.querySelector('img').classList.remove('do_image_more');
+      });
       event.preventDefault();
       var typeWindowCalc = event.target.parentNode.getAttribute('class');
       bigImg.forEach(function (el) {
@@ -1604,13 +1651,12 @@ function calc() {
           el.style.display = 'none';
         }
       });
-      console.log(windowSettings);
+      element.querySelector('img').classList.add('do_image_more');
     });
   });
   popupCalcInput.forEach(function (input) {
     input.addEventListener('keyup', function () {
       this.value = this.value.replace(/[^0-9]+/g, '');
-      input.textContent = this.value;
     });
   });
   popupCalcButton.addEventListener('click', function () {
@@ -1618,7 +1664,9 @@ function calc() {
       popupCalc.style.display = 'none';
       popupCalcProfile.style.display = 'block';
       windowSettings.width = popupCalcInput[0].value;
+      popupCalcInput[0].value = '';
       windowSettings.heigh = popupCalcInput[1].value;
+      popupCalcInput[1].value = '';
       windowSettings.glazingType = popupCalcSelect.options[0].value;
     } else {
       popupCalcInput.forEach(function (input) {
@@ -1647,25 +1695,12 @@ function calc() {
     if (windowSettings.glazingProfile) {
       popupCalcProfile.style.display = 'none';
       popupCalcEnd.style.display = 'block';
+      document.querySelectorAll('.checkbox').forEach(function (c) {
+        return c.checked = false;
+      });
     }
   });
-  popupCalcProfile.addEventListener('click', function (event) {
-    var target = event.target;
-
-    if (target.classList.contains('popup_calc_profile_close') || target.parentNode.classList.contains('popup_calc_profile_close') || target.classList.contains('popup_calc_profile')) {
-      popupCalcProfile.style.display = 'none';
-      windowSettings = {};
-    }
-  });
-  popupCalcEnd.addEventListener('click', function (event) {
-    var target = event.target;
-
-    if (target.classList.contains('popup_calc_end_close') || target.parentNode.classList.contains('popup_calc_end_close') || target.classList.contains('popup_calc_end')) {
-      popupCalcEnd.style.display = 'none';
-      windowSettings = {};
-    }
-  }); // const popupCalcEndForms = document.querySelector('.popup_calc_end form');
-  // submissionForm(popupCalcEndForms, windowSettings);
+  return windowSettings;
 }
 
 module.exports = calc;
@@ -1677,204 +1712,91 @@ module.exports = calc;
   !*** ./parts/form.js ***!
   \***********************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "../node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
-
-function form() {
+function form(windowSettings) {
   var message = {
     loading: 'Загрузка...',
-    success: 'Спасибо! Скоро мы с вами свяжимся!',
+    success: 'Спасибо! Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...'
-  };
-  var form = document.querySelectorAll('form'),
-      input = document.getElementsByTagName('input'),
-      statusMessage = document.createElement('div'),
-      inputPhone = document.getElementsByName('user_phone');
-  form.forEach(function submissionForm(element) {
-    element.addEventListener('submit', function (a) {
-      a.preventDefault();
-      element.appendChild(statusMessage);
-      var formData = new FormData(element);
-      var obj = {};
-      formData.forEach(function (value, key) {
-        obj[key] = value;
-      });
-      var json = JSON.stringify(obj);
+  }; //Формы на сайте
 
-      function postData() {
-        return new _Promise(function (resolve, reject) {
-          var request = new XMLHttpRequest();
-          request.open('POST', 'server.php');
-          request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+  var freeMasterForms = document.querySelectorAll('.main_form');
+  freeMasterForms.forEach(function (form) {
+    sendForm(form);
+  }); // Формы модальных окон "Обратного звонка"
 
-          request.onreadystatechange = function () {
-            if (request.readyState < 4) {
-              resolve();
-            } else if (request.readyState === 4) {
-              if (request.status == 200) {
-                resolve();
-              } else {
-                reject();
-              }
-            }
-          };
+  var popupForm = document.querySelector('.popup form');
+  sendForm(popupForm); // Формы модальных окон "Вызов замерщика"
 
-          request.send(json);
-        });
-      }
+  var popupEngineerForm = document.querySelector('.popup_engineer form');
+  sendForm(popupEngineerForm); // Формы модальных окон "Отправка калькулятора"
 
-      function clearInput() {
-        for (var i = 0; i < input.length; i++) {
-          input[i].value = '';
-        }
-      }
+  var popupCalcEndForms = document.querySelector('.popup_calc_end form');
+  sendForm(popupCalcEndForms, windowSettings);
 
-      postData(formData).then(function () {
+  function sendForm(form) {
+    var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var statusMessage = document.createElement('div'),
+        curentFormInputs = form.querySelectorAll('input');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      form.appendChild(statusMessage);
+      var formData = new FormData(form);
+      postData(formData, object).then(function () {
         return statusMessage.innerHTML = message.loading;
       }).then(function () {
-        statusMessage.innerHTML = message.success;
-        setTimeout(cleaner, 3000);
+        return statusMessage.innerHTML = message.success;
       }).catch(function () {
         return statusMessage.innerHTML = message.failure;
-      }).then(clearInput);
+      }).then(clearInput(curentFormInputs)).then(clearObject(object));
     });
-  });
-
-  function cleaner() {
-    statusMessage.innerHTML = "";
   }
 
-  inputPhone.forEach(function (item) {
-    item.addEventListener('focus', function () {
-      if (!/^\+\d*$/.test(item.value)) item.value = '+';
-    });
-    item.addEventListener('keypress', function (e) {
-      if (!/\d/.test(e.key)) {
-        e.preventDefault();
-        alert("Прошу вводить только цифры");
-      } else {
-        if (item.value.length == 2) item.value = item.value + "(";
-        if (item.value.length == 6) item.value = item.value + ")-";
-        if (item.value.length == 11) item.value = item.value + "-";
-        if (item.value.length == 14) item.value = item.value + "-";
-        if (item.value.length > 16) item.value = item.value.substring(0, 16);
-      }
-    });
-  });
+  function postData(data) {
+    var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    return new Promise(function (resolve, reject) {
+      var request = new XMLHttpRequest();
+      request.open('POST', 'server.php');
+      request.setRequestHeader('Content-Type', 'aplication/json charset=utf-8');
+      var json = formDataToJSON(data, object);
 
-  function calc() {
-    var popupCalcBtn = document.querySelectorAll('.popup_calc_btn'),
-        // Кнопки вызова первого окна
-    popupCalc = document.querySelector('.popup_calc'),
-        // Модальное окно выбора формы балкона
-    balconIcons = document.querySelectorAll('.balcon_icons a'),
-        // меню выбора формы балкона
-    bigImg = document.querySelectorAll('.big_img img'),
-        // Блоки с большыми картинками
-    popupCalcButton = document.querySelector('.popup_calc_button'),
-        // Кнопка "Далее"
-    popupCalcProfile = document.querySelector('.popup_calc_profile'),
-        // Второе модальное окно
-    popupCalcProfileButton = document.querySelector('.popup_calc_profile_button'),
-        // Третье модальное окно
-    popupCalcEnd = document.querySelector('.popup_calc_end'),
-        // Третье модальное окно
-    popupCalcInput = popupCalc.querySelectorAll('input'),
-        popupCalcSelect = document.querySelector('select'),
-        popupCalcLabel = popupCalcProfile.querySelectorAll('label'),
-        windowSettings = {};
-    popupCalcBtn.forEach(function (element) {
-      element.addEventListener('click', function () {
-        popupCalc.style.display = "block";
-        windowSettings.type = balconIcons[0].getAttribute('class');
-      });
-    });
-    popupCalc.addEventListener('click', function (event) {
-      var target = event.target;
-
-      if (target.classList.contains('popup_calc_close') || target.parentNode.classList.contains('popup_calc_close') || target.classList.contains('popup_calc')) {
-        popupCalc.style.display = 'none';
-        windowSettings = {};
-      }
-    });
-    balconIcons.forEach(function (element) {
-      element.addEventListener('click', function (event) {
-        event.preventDefault();
-        var typeWindowCalc = event.target.parentNode.getAttribute('class');
-        bigImg.forEach(function (el) {
-          var typeSelectedWindow = el.getAttribute('id');
-
-          if (typeSelectedWindow == typeWindowCalc) {
-            el.style.display = 'inline-block';
-            windowSettings.type = typeWindowCalc;
+      request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+          if (request.status == 200) {
+            resolve();
           } else {
-            el.style.display = 'none';
+            reject();
           }
-        });
-        console.log(windowSettings);
-      });
-    });
-    popupCalcInput.forEach(function (input) {
-      input.addEventListener('keyup', function () {
-        this.value = this.value.replace(/[^0-9]+/g, '');
-        input.textContent = this.value;
-      });
-    });
-    popupCalcButton.addEventListener('click', function () {
-      if (popupCalcInput[0].value && popupCalcInput[1].value) {
-        popupCalc.style.display = 'none';
-        popupCalcProfile.style.display = 'block';
-        windowSettings.width = popupCalcInput[0].value;
-        windowSettings.heigh = popupCalcInput[1].value;
-        windowSettings.glazingType = popupCalcSelect.options[0].value;
-      } else {
-        popupCalcInput.forEach(function (input) {
-          if (!input.value) {
-            input.focus();
-          }
-        });
-      }
-    });
-    popupCalcSelect.addEventListener('change', function () {
-      windowSettings.glazingType = this.options[this.selectedIndex].value;
-    });
-    popupCalcLabel.forEach(function (label) {
-      label.addEventListener('change', function (event) {
-        if (event.target.classList.contains('checkbox')) {
-          [].slice.call(document.querySelectorAll('.checkbox')).forEach(function (c) {
-            return c.checked = false;
-          });
-          event.target.checked = true;
         }
+      };
 
-        windowSettings.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
-      });
+      request.send(json);
     });
-    popupCalcProfileButton.addEventListener('click', function () {
-      if (windowSettings.glazingProfile) {
-        popupCalcProfile.style.display = 'none';
-        popupCalcEnd.style.display = 'block';
-      }
-    });
-    popupCalcProfile.addEventListener('click', function (event) {
-      var target = event.target;
+  }
 
-      if (target.classList.contains('popup_calc_profile_close') || target.parentNode.classList.contains('popup_calc_profile_close') || target.classList.contains('popup_calc_profile')) {
-        popupCalcProfile.style.display = 'none';
-        windowSettings = {};
-      }
+  function formDataToJSON(formData) {
+    var object = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var obj = {};
+    formData.forEach(function (value, key) {
+      obj[key] = value;
     });
-    popupCalcEnd.addEventListener('click', function (event) {
-      var target = event.target;
 
-      if (target.classList.contains('popup_calc_end_close') || target.parentNode.classList.contains('popup_calc_end_close') || target.classList.contains('popup_calc_end')) {
-        popupCalcEnd.style.display = 'none';
-        windowSettings = {};
-      }
-    });
-    var popupCalcEndForms = document.querySelector('.popup_calc_end form');
-    submissionForm(popupCalcEndForms, windowSettings);
+    if (object) {
+      return JSON.stringify(Object.assign(object, obj));
+    } else {
+      return JSON.stringify(obj);
+    }
+  }
+
+  function clearInput(inputs) {
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = '';
+    }
+  }
+
+  function clearObject(object) {
+    object = {};
   }
 }
 
@@ -1890,48 +1812,41 @@ module.exports = form;
 /***/ (function(module, exports) {
 
 function modal() {
-  var modalPopup = document.querySelector('.popup'),
-      callBack = document.querySelectorAll('.phone_link'),
-      modalPopupEngineer = document.querySelector('.popup_engineer'),
-      popupBtn = document.querySelector('.header_btn'),
-      closePopup = document.getElementsByClassName('popup_close')[0],
-      closePopupEngineer = document.getElementsByClassName('popup_close')[1];
-  callBack.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-      modalPopup.style.display = 'block';
-      document.body.parentElement.style.overflow = 'hidden';
+  var engineerButton = document.querySelector('.popup_engineer_btn'),
+      popupEngineer = document.querySelector('.popup_engineer');
+  engineerButton.addEventListener('click', function () {
+    popupEngineer.style.display = "block";
+  });
+  closeModal(popupEngineer, 'popup_engineer', 'popup_close');
+  var phoneLink = document.querySelectorAll('.phone_link'),
+      popupModal = document.querySelector('.popup');
+  phoneLink.forEach(function (element) {
+    element.addEventListener('click', function () {
+      event.preventDefault();
+      popupModal.style.display = "block";
     });
   });
-  popupBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    modalPopupEngineer.style.display = 'block';
-    document.body.parentElement.style.overflow = 'hidden';
-  });
+  closeModal(popupModal, 'popup', 'popup_close');
+  var popupCalcProfile = document.querySelector('.popup_calc_profile'),
+      popupCalcEnd = document.querySelector('.popup_calc_end'),
+      popupCalc = document.querySelector('.popup_calc');
+  closeModal(popupCalc, 'popup_calc', 'popup_calc_close');
+  closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close');
+  closeModal(popupCalcEnd, 'popup_calc_end', 'popup_calc_end_close');
+
+  function closeModal(trigger, selector, closeSelector) {
+    trigger.addEventListener('click', function (event) {
+      var target = event.target;
+
+      if (target.classList.contains(closeSelector) || target.parentNode.classList.contains(closeSelector) || target.classList.contains(selector)) {
+        trigger.style.display = 'none';
+      }
+    });
+  }
+
   setTimeout(function () {
-    modalPopup.style.display = "block";
-    document.body.parentElement.style.overflow = 'hidden';
+    popupModal.style.display = "block";
   }, 60 * 1000);
-  closePopup.addEventListener('click', function () {
-    modalPopup.style.display = 'none';
-    document.body.parentElement.style.overflow = '';
-  });
-  window.addEventListener('click', function (e) {
-    if (e.target == modalPopup) {
-      modalPopup.style.display = 'none';
-      document.body.parentElement.style.overflow = '';
-    }
-  });
-  closePopupEngineer.addEventListener('click', function () {
-    modalPopupEngineer.style.display = 'none';
-    document.body.parentElement.style.overflow = '';
-  });
-  window.addEventListener('click', function (e) {
-    if (e.target == modalPopupEngineer) {
-      modalPopupEngineer.style.display = 'none';
-      document.body.parentElement.style.overflow = '';
-    }
-  });
 }
 
 module.exports = modal;
@@ -1996,171 +1911,86 @@ module.exports = pictures;
 
 /***/ }),
 
-/***/ "./parts/slider.js":
-/*!*************************!*\
-  !*** ./parts/slider.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function slider() {// let slideIndex = 1,
-  //   slides = document.querySelectorAll('.slider-item'),
-  //   prev = document.querySelector('.prev'),
-  //   next = document.querySelector('.next'),
-  //   dotsWrap = document.querySelector('.slider-dots'),
-  //   dots = document.querySelectorAll('.dot');
-  // showSlides(slideIndex);
-  // function showSlides (n) {
-  //   if(n > slides.length) {
-  //     slideIndex = 1;
-  //   }
-  //   if(n < 1) {
-  //     slideIndex = slides.length;
-  //   }
-  //   slides.forEach((item) => item.style.display = 'none');
-  //   dots.forEach((item) => item.classList.remove('dot-active'));
-  //   slides[slideIndex - 1].style.display = 'block';
-  //   dots[slideIndex - 1].classList.add('dot-active');    
-  // }
-  // function plusSlides(n) {
-  //   showSlides(slideIndex += n);
-  // }
-  // function currentSlides(n) {
-  //   showSlides(slideIndex = n);
-  // }
-  // prev.addEventListener('click', () => {
-  //   plusSlides(-1);
-  // });
-  // next.addEventListener('click', () => {
-  //   plusSlides(1);
-  // });
-  // dotsWrap.addEventListener('click', (event) => {
-  //   for (let i = 0; i < dots.length + 1; i++) {
-  //     if (event.target.classList.contains('dot') && event.target == dots[i-1]) {
-  //       currentSlides(i);
-  //     }
-  //   }
-  // });
-}
-
-module.exports = slider;
-
-/***/ }),
-
 /***/ "./parts/tabs.js":
 /*!***********************!*\
   !*** ./parts/tabs.js ***!
   \***********************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 function tabs() {
-  //Табы остекления
-  var info = document.querySelector('.glazing_slider'),
-      tabImg = document.querySelectorAll('.img'),
-      tabText = document.querySelectorAll('.tab-link'),
-      tabContent = document.querySelectorAll('.info-tabcontent-1'); //Табы отделки
+  var glazingSlider = document.querySelector('.glazing_slider'),
+      glazingBlock = document.querySelectorAll('.glazing_block'),
+      glazingRow = document.querySelectorAll('.glazing .row');
+  hideTabContent(1, glazingRow);
+  glazingSlider.addEventListener('click', function (event) {
+    var target = event.target;
 
-  var info2 = document.querySelector('.decoration_slider'),
-      tabText2 = document.querySelectorAll('.decoration_slider-link'),
-      tabContent2 = document.querySelectorAll('.info-tabcontent-2'); // табы в калькуляторе
-
-  var info3 = document.querySelector('.balcon_icons'),
-      tabLinck = info3.querySelectorAll('.balcon_icons a'),
-      tabImg3 = info3.querySelectorAll('.type_img'),
-      tabContent3 = document.querySelectorAll('.big_img-item');
-  tabLinck.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-    });
-  });
-
-  function hideTabContent(a, b) {
-    for (var i = a; i < b.length; i++) {
-      b[i].classList.remove('show');
-      b[i].classList.add('hide');
-
-      if (b[i].classList.contains('big_img-item')) {
-        b[i].style.margin = 'auto';
-        b[i].style.marginBottom = '10px';
-      }
+    if (!target.classList.contains('glazing_block')) {
+      target = target.parentNode;
     }
-  }
 
-  hideTabContent(1, tabContent);
-  hideTabContent(1, tabContent2);
-  hideTabContent(1, tabContent3);
+    if (target) {
+      for (var i = 0; i < glazingBlock.length; i++) {
+        glazingBlock[i].querySelector('a').classList.remove('active');
 
-  function showTabContent(b, c) {
-    if (c[b].classList.contains('hide')) {
-      c[b].classList.add('show');
-      c[b].classList.remove('hide');
-    }
-  }
-
-  function wrap(params) {
-    params.addEventListener('click', function (event) {
-      var target = event.target;
-
-      if (target || target.classList.contains('glazing_block') || target.classList.contains('tab-link') || target.classList.contains('img') || target.classList.contains('decoration_slider-link')) {
-        var tab = function tab(_tab, tabContent) {
-          for (var i = 0; i < _tab.length; i++) {
-            if (target == _tab[i]) {
-              hideTabContent(0, tabContent);
-              showTabContent(i, tabContent);
-              break;
-            }
-          }
-        };
-
-        tab(tabImg, tabContent);
-        tab(tabText, tabContent);
-        tab(tabText2, tabContent2);
-        tab(tabImg3, tabContent3);
+        if (glazingBlock[i] == target) {
+          hideTabContent(0, glazingRow);
+          showTabContent(i, glazingRow);
+        }
       }
-    });
-  }
 
-  ;
-  wrap(info);
-  wrap(info2);
-  wrap(info3); //Табы, добовляющие стиль
-
-  var slideIndex = 1;
-  showSlides(slideIndex);
-
-  function showSlides(slideIndex) {
-    tabText2.forEach(function (item) {
-      return item.parentNode.classList.remove('after_click');
-    });
-    tabText2[slideIndex - 1].parentNode.classList.add('after_click');
-  }
-
-  info2.addEventListener('click', function (event) {
-    for (var i = 0; i < tabText2.length + 1; i++) {
-      if (event.target.classList.contains('decoration_slider-link') && event.target == tabText2[i - 1]) {
-        showSlides(i);
-      }
-    }
-  }); //Увеличение картинок остекления в калькуляторе
-
-  var imgIndex = 1;
-  activeImg(imgIndex);
-
-  function activeImg(imgIndex) {
-    tabImg3.forEach(function (item) {
-      return item.classList.remove('do_image_more');
-    });
-    tabImg3[imgIndex - 1].classList.add('do_image_more');
-  }
-
-  info3.addEventListener('click', function (event) {
-    for (var i = 0; i < tabImg3.length + 1; i++) {
-      if (event.target.classList.contains('type_img') && event.target == tabImg3[i - 1]) {
-        activeImg(i);
-      }
+      target.querySelector('a').classList.add('active');
     }
   });
+  var decorationSlider = document.querySelector('.decoration_slider'),
+      decorationItem = document.querySelectorAll('.decoration_item'),
+      decorationRow = document.querySelectorAll('.decoration_row');
+  decorationSlider.querySelectorAll('a')[0].focus();
+  hideTabContent(1, decorationRow);
+  decorationSlider.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (!target.classList.contains('no_click') && !target.classList.contains('after_click')) {
+      target = target.parentNode;
+    }
+
+    target = target.parentNode;
+
+    if (!target.querySelector('div').classList.contains('after_click')) {
+      for (var i = 0; i < decorationItem.length; i++) {
+        decorationItem[i].querySelector('div').classList.remove('after_click');
+        decorationItem[i].querySelector('div').classList.add('no_click');
+
+        if (decorationItem[i] == target) {
+          hideTabContent(0, decorationRow);
+          showTabContent(i, decorationRow);
+        }
+      }
+
+      target.querySelector('div').classList.add('after_click');
+      target.querySelector('div').classList.remove('no_click');
+    }
+
+    target.querySelector('a').focus();
+  });
+
+  function hideTabContent(key, slideItems) {
+    for (var i = key; i < slideItems.length; i++) {
+      slideItems[i].classList.remove('show');
+      slideItems[i].classList.add('hide');
+    }
+  }
+
+  function showTabContent(key, slideItems) {
+    if (slideItems[key].classList.contains('hide')) {
+      slideItems[key].classList.remove('hide');
+      slideItems[key].classList.add('show');
+    }
+  }
 }
 
 module.exports = tabs;

@@ -13,6 +13,27 @@ body {
   color: #000000;
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.text {
+  color: #0089cd;
+}
+
+.big_img {
+  height: 70%;
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 .status {
   display: block;
   color: red;
@@ -316,7 +337,6 @@ textarea:focus {
 .main {
   padding: 10rem 0;
   background: #ffffff url(../img/main/bg.png) 0 0 no-repeat;
-  background-size: cover;
 }
 
 .main h1 {
@@ -541,7 +561,7 @@ textarea:focus {
 }
 
 .decoration_item .no_click {
-  /*border: 1px solid red;*/
+  /* border: 1px solid red; */
   height: 8rem;
   padding: 2rem 0;
   border-top: 1rem solid #f7f7f7;
@@ -597,45 +617,28 @@ textarea:focus {
 .works {
   padding: 5rem 0;
 }
-.works div {
-  position: relative;
-}
+
 .works img {
   margin-bottom: 3rem;
 }
 
-.works a .lupa {
-  pointer-events: none;
-  position: absolute;
+.works a[data-fancybox="gallery"] .lupa {
+  /* position: ; */
+  top: 0;
+  left: 0;
   left: 50%;
-  top: 40%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+  top: 40%;
   opacity: 0;
   -webkit-transition: ease 0.2s;
   transition: ease 0.2s;
 }
 
-.works a:hover .lupa {
+.works a[data-fancybox="gallery"]:hover .lupa {
   opacity: 1;
 }
 
-.works_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.works_overlay img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-}
 /*Guarantees*/
 .guarantees {
   padding: 6rem 0 1rem;
@@ -748,13 +751,6 @@ textarea:focus {
   text-align: center;
   color: black;
 }
-
-
-
-
-
-
-
 
 /*Contacts*/
 .contacts {
@@ -1124,15 +1120,6 @@ textarea:focus {
   padding: 1rem 5rem;
 }
 
-.show {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.hide {
-  display: none;
-}
 /*Media*/
 @media (max-width: 1400px) {
   .main {

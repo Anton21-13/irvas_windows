@@ -1,57 +1,55 @@
 function modal() {
+ 
+  let engineerButton = document.querySelector('.popup_engineer_btn'), 
+		popupEngineer = document.querySelector('.popup_engineer'); 	
 
-  let modalPopup = document.querySelector('.popup'),
-    callBack = document.querySelectorAll('.phone_link'),
 
-    modalPopupEngineer = document.querySelector('.popup_engineer'),
-    popupBtn = document.querySelector('.header_btn'),
+	engineerButton.addEventListener('click', () => {
+		popupEngineer.style.display = "block";
+	});
 
-    closePopup = document.getElementsByClassName('popup_close')[0],
-    closePopupEngineer = document.getElementsByClassName('popup_close')[1];
+	closeModal(popupEngineer, 'popup_engineer', 'popup_close');
 
-  callBack.forEach(function (item) {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      modalPopup.style.display = 'block';
-      document.body.parentElement.style.overflow = 'hidden';
-    });
-  });
 
-  popupBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    modalPopupEngineer.style.display = 'block';
-    document.body.parentElement.style.overflow = 'hidden';
-  });
+  let phoneLink = document.querySelectorAll('.phone_link'), 			
+		popupModal = document.querySelector('.popup'); 						
 
-  setTimeout(() => {
-    modalPopup.style.display = "block";
-    document.body.parentElement.style.overflow = 'hidden';
-  }, 60 * 1000);
-  
-  closePopup.addEventListener('click', () => {
-    modalPopup.style.display = 'none';
-    document.body.parentElement.style.overflow = '';
-  });
+	phoneLink.forEach(element => {
+		element.addEventListener('click', () => {
+			event.preventDefault();
+			popupModal.style.display = "block";
+		});
+	});
 
-  window.addEventListener('click', (e) => {
-    if (e.target == modalPopup) {
-      modalPopup.style.display = 'none';
-      document.body.parentElement.style.overflow = '';
-    }
-  });
 
-  closePopupEngineer.addEventListener('click', () => {
-    modalPopupEngineer.style.display = 'none';
-    document.body.parentElement.style.overflow = '';
-  });
+	closeModal(popupModal, 'popup', 'popup_close');
 
-  window.addEventListener('click', (e) => {
-    if (e.target == modalPopupEngineer) {
-      modalPopupEngineer.style.display = 'none';
-      document.body.parentElement.style.overflow = '';
-    }
-  });
+	let popupCalcProfile = document.querySelector('.popup_calc_profile'),
+		popupCalcEnd = document.querySelector('.popup_calc_end'),
+		popupCalc = document.querySelector('.popup_calc');
 
+	closeModal(popupCalc, 'popup_calc', 'popup_calc_close');
+
+	closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close');
+
+	closeModal(popupCalcEnd, 'popup_calc_end', 'popup_calc_end_close');
+
+	function closeModal (trigger, selector, closeSelector){
+		trigger.addEventListener('click', (event) => {
+			let target = event.target;
+	
+			if (target.classList.contains(closeSelector) ||
+				target.parentNode.classList.contains(closeSelector) ||
+				target.classList.contains(selector)) {
+				trigger.style.display = 'none';
+			}
+		});
+	}
+
+
+	setTimeout(() => {
+		popupModal.style.display = "block";
+	}, 60 * 1000);
 }
 
 module.exports = modal;
